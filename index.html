@@ -5,45 +5,323 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Benefits Hub — Conheça todos os benefícios Pipefy">
   <title>Benefits Hub — Pipefy</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
   <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
-
   <div id="header-placeholder"></div>
 
   <main id="main-content">
-    <div class="container section">
-      <div class="gradient-bar"></div>
-      <span class="badge">Etapa 1 — Estrutura base</span>
-      <h1 style="margin-top: 1rem;">
-        Bem-vinda, <span class="text-gradient">Honey Badger</span> 🚀
-      </h1>
-      <p style="margin-top: 1rem; color: var(--text-secondary); max-width: 560px;">
-        Header, footer, fontes, cores e roteamento funcionando. 
-        A home completa vem na próxima etapa.
-      </p>
 
-      <!-- Teste de card -->
-      <div class="card" style="margin-top: var(--space-xl); max-width: 400px;">
-        <div class="section-label">Componente</div>
-        <h3>Card de exemplo</h3>
-        <p style="color: var(--text-secondary); margin-top: 0.5rem;">
-          Superfície, borda sutil e hover funcionando com as cores Pipefy.
-        </p>
+    <section class="section-dark hero-section" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="gradient-bar"></div>
+        <h1 id="hero-title">Cuidar de você é o nosso compromisso.</h1>
+        <p class="hero-subtitle">O Benefits Hub é onde o valor People First se traduz em prática — tudo sobre o programa de benefícios da Pipefy, reunido em um só lugar.</p>
       </div>
-    </div>
+    </section>
+
+    <section aria-labelledby="cuidado-title">
+      <div class="container section">
+        <div class="section-label">O Cuidado em Foco</div>
+        <h2 id="cuidado-title">A filosofia por trás dos seus benefícios</h2>
+        <div class="grid-3">
+          <div class="card card-feature">
+            <h3>Trabalho: fonte de sentido</h3>
+            <p style="color:var(--text-secondary);margin-top:0.5rem">Na Pipefy, buscamos um espaço onde cada pessoa se desenvolva, exerça criatividade e encontre propósito. Os benefícios são uma extensão desse compromisso.</p>
+          </div>
+          <div class="card card-feature">
+            <h3>Cuidado em 7 dimensões</h3>
+            <p style="color:var(--text-secondary);margin-top:0.5rem">O programa cobre o bem-estar de forma completa: emocional, financeiro, social, ocupacional, físico, intelectual e comunitário. Porque uma vida equilibrada vai além de um único aspecto.</p>
+          </div>
+          <div class="card card-feature">
+            <h3>Diversidade que fortalece</h3>
+            <p style="color:var(--text-secondary);margin-top:0.5rem">Bem-estar não é fórmula única. Cada trajetória é diferente — por isso o programa foi desenhado para caber na sua vida, não o contrário.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-dark" aria-labelledby="mandala-title">
+      <div class="container section">
+        <div class="mandala-layout">
+          <div class="mandala-text">
+            <div class="section-label">Por que temos a mandala</div>
+            <h2 id="mandala-title">Um cuidado holístico com sua vida</h2>
+            <p>Bem-estar é o equilíbrio entre fatores biológicos, psicológicos e sociais — não apenas a ausência de doença.</p>
+            <p>Nosso programa, organizado na mandala, reflete um cuidado com a vida inteira dos Honey Badgers. Conhecer e usar a mandala é um ato de autocuidado que transforma os benefícios em suporte real.</p>
+            <p style="color:rgba(255,255,255,0.4);font-size:0.85rem">Clique em um pilar para explorar os benefícios.</p>
+          </div>
+          <div class="mandala-wheel">
+            <canvas id="mandala" aria-label="Mandala de benefícios Pipefy com 7 pilares clicáveis"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="pratica-title">
+      <div class="container section">
+        <div class="section-label">Cuidado na Prática</div>
+        <h2 id="pratica-title">Benefícios que acompanham sua jornada</h2>
+        <div class="grid-3">
+          <div class="pratica-item">
+            <div class="pratica-num" aria-hidden="true">01</div>
+            <div>
+              <h3>Protagonismo no bem-estar</h3>
+              <p>Você é o protagonista da sua experiência. Conhecer seus benefícios é o primeiro passo para usá-los de forma estratégica no seu dia a dia.</p>
+            </div>
+          </div>
+          <div class="pratica-item">
+            <div class="pratica-num" aria-hidden="true">02</div>
+            <div>
+              <h3>No cotidiano</h3>
+              <p>Os benefícios estão presentes em diferentes momentos — do home office à academia, da consulta médica ao curso online. Tudo pensado para o seu dia a dia.</p>
+            </div>
+          </div>
+          <div class="pratica-item">
+            <div class="pratica-num" aria-hidden="true">03</div>
+            <div>
+              <h3>Rede de apoio</h3>
+              <p>Do plano de saúde ao apoio psicológico, da licença parental ao desconto em viagens — o programa é uma rede completa de suporte para você e sua família.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-numbers" aria-label="Números do programa de benefícios">
+      <div class="container">
+        <div class="numbers-grid">
+          <div class="stat">
+            <div><span class="stat-value">R$ 525</span><span class="stat-period">/mês</span></div>
+            <p class="stat-label">Em apoio psicológico</p>
+            <p class="stat-detail">Subsidiado pela Pipefy via Keiken</p>
+          </div>
+          <div class="stat">
+            <div><span class="stat-value">180</span><span class="stat-period"> dias</span></div>
+            <p class="stat-label">De licença maternidade</p>
+            <p class="stat-detail">Para mães e apoio progressivo para pais</p>
+          </div>
+          <div class="stat">
+            <div><span class="stat-value">R$ 1k+</span></div>
+            <p class="stat-label">Em subsídios mensais</p>
+            <p class="stat-detail">Entre alimentação, educação, saúde e mobilidade</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="acesso-title">
+      <div class="container section">
+        <div class="section-label">Acesso Rápido</div>
+        <h2 id="acesso-title">O que você precisa, agora</h2>
+        <div class="grid-3">
+          <a href="parentalidade.html" class="card card-link">
+            <div class="card-link-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <h3>Guia de Parentalidade</h3>
+            <p>Tudo o que você precisa saber para a jornada como pai ou mãe na Pipefy.</p>
+            <span class="card-link-arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="links-uteis.html" class="card card-link">
+            <div class="card-link-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </div>
+            <h3>Links Úteis</h3>
+            <p>Acesso direto às plataformas parceiras: Keiken, Wellhub, Caju, Pipo e mais.</p>
+            <span class="card-link-arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="fale-com-o-time.html" class="card card-link">
+            <div class="card-link-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3>Fale com o Time</h3>
+            <p>Dúvidas sobre benefícios? O time de C&amp;B está aqui para ajudar.</p>
+            <span class="card-link-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <div id="footer-placeholder"></div>
 
   <script>const BASE = './';</script>
   <script src="js/components.js"></script>
+  <script>
+  (function() {
+    const LOGO_D = 'M245.43 51.1485C245.43 51.0985 245.43 49.5185 245.44 49.4585C245.95 40.4285 254.89 38.9685 256.14 38.8585V28.9785C253.12 28.8085 233.56 31.7185 233.76 51.1285C233.77 51.1285 233.78 51.1485 233.78 51.1485H228.18V60.6685H233.72V97.6185H245.44V60.6685H257.84L269.48 82.0385L252.63 112.938H266.04L282.9 82.0285L266.06 51.1585H245.42L245.43 51.1485ZM286.46 51.1485L279.24 64.4985L285.9 76.6885L299.9 51.1285H286.47L286.46 51.1485ZM161.58 76.9585C160.45 81.9685 156.53 85.8385 151.45 86.9585C141.57 89.1285 132.93 80.5885 135.13 70.8385C136.26 65.8285 140.18 61.9585 145.25 60.8385C155.13 58.6685 163.78 67.2085 161.58 76.9585ZM158.04 51.2085C145.06 46.3085 134.68 53.9685 134.68 53.9685L132.62 51.2285H123.06V113.028H134.61V93.6485C134.61 93.6485 140.88 98.2485 149.25 98.2485C163.68 98.2485 175.25 85.9385 173.77 71.3985C172.85 62.3385 166.66 54.4685 158.05 51.2185L158.04 51.2085ZM189.98 67.0085L189.981 67.0061C190.055 66.8564 193.06 60.7385 202.48 60.7385C211.97 60.7385 214.98 66.9985 214.98 67.0085H189.98ZM202.53 49.3185C188.89 49.3185 177.83 60.2685 177.83 73.7785C177.83 87.2885 188.89 98.2385 202.53 98.2385C210.04 98.2385 219.78 94.5085 224.97 83.9285H211C210.23 84.5985 209.33 85.2185 208.28 85.7285C206.7 86.4785 204.8 86.9685 202.49 86.9685C193.98 86.9685 190.62 80.5285 190.44 78.7285H226.72C226.766 78.2739 226.831 77.8163 226.896 77.355L226.896 77.3544C226.999 76.6288 227.103 75.8942 227.14 75.1485C227.93 60.2585 215.95 49.3285 202.55 49.3285L202.53 49.3185ZM105.01 97.6885H116.58V51.2185H105.01V97.6885ZM77.4 86.9584C82.47 85.8384 86.39 81.9684 87.52 76.9584C89.72 67.2084 81.07 58.6684 71.19 60.8384C66.12 61.9584 62.2 65.8284 61.07 70.8384C58.87 80.5884 67.52 89.1284 77.4 86.9584ZM60.62 53.9684C60.62 53.9684 71 46.3084 83.98 51.2084L83.99 51.2184C92.6 54.4684 98.79 62.3384 99.71 71.3984C101.19 85.9384 89.62 98.2484 75.19 98.2484C66.81 98.2484 60.54 93.6484 60.54 93.6484V113.028H49V51.2284H58.56L60.62 53.9684Z';
+
+    const pilares = [
+      { nome:'Comunitário', cor:'#FF6B35', slug:'comunitario' },
+      { nome:'Emocional',   cor:'#FFA726', slug:'emocional'   },
+      { nome:'Financeiro',  cor:'#4CAF50', slug:'financeiro'  },
+      { nome:'Social',      cor:'#26A69A', slug:'social'      },
+      { nome:'Ocupacional', cor:'#8E24AA', slug:'ocupacional' },
+      { nome:'Físico',      cor:'#E91E8C', slug:'fisico'      },
+      { nome:'Intelectual', cor:'#E53935', slug:'intelectual' },
+    ];
+
+    const ICON_PATHS = [
+      // Comunitário — globo
+      'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z',
+      // Emocional — coração
+      'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z',
+      // Financeiro — cifrão
+      'M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z',
+      // Social — grupo de pessoas
+      'M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z',
+      // Ocupacional — engrenagem
+      'M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z',
+      // Físico — haltere
+      'M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z',
+      // Intelectual — lâmpada
+      'M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z',
+    ];
+
+    const canvas = document.getElementById('mandala');
+    if (!canvas) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    const SIZE = 420;
+    canvas.width  = SIZE * dpr;
+    canvas.height = SIZE * dpr;
+    canvas.style.width  = SIZE + 'px';
+    canvas.style.height = SIZE + 'px';
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+
+    const CX=SIZE/2, CY=SIZE/2, R=195, r=90, BUMP=25, N=7;
+    const SA=(Math.PI*2)/N, GAP=0.022;
+    let hov=-1, loadedCount=0;
+
+    function makeIconImg(pathD) {
+      const svg = `<svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="${pathD}"/></svg>`;
+      const img = new Image();
+      img.onload = () => { loadedCount++; if (loadedCount === N + 1) draw(); };
+      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+      return img;
+    }
+
+    const iconImgs = ICON_PATHS.map(makeIconImg);
+
+    const logoSvg = `<svg viewBox="49 18 250.9 106" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="${LOGO_D}" fill="#101A49"/></svg>`;
+    const logoImg = new Image();
+    logoImg.onload = () => { loadedCount++; if (loadedCount === N + 1) draw(); };
+    logoImg.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(logoSvg);
+
+    function seg(i){ const s=-Math.PI/2+i*SA+GAP, e=-Math.PI/2+(i+1)*SA-GAP; return {s,e,mid:(s+e)/2}; }
+
+    function drawSegs(){
+      pilares.forEach((p,i)=>{
+        const {s,e,mid}=seg(i), isH=hov===i;
+        const ox=isH?Math.cos(mid)*8:0, oy=isH?Math.sin(mid)*8:0;
+        ctx.save(); ctx.translate(ox,oy);
+        ctx.beginPath();
+        ctx.moveTo(CX+r*Math.cos(s),CY+r*Math.sin(s));
+        ctx.lineTo(CX+R*Math.cos(s),CY+R*Math.sin(s));
+        ctx.arc(CX,CY,R,s,e);
+        ctx.lineTo(CX+r*Math.cos(e),CY+r*Math.sin(e));
+        ctx.arc(CX,CY,r,e,s,true);
+        ctx.closePath();
+        ctx.fillStyle=isH?p.cor:p.cor+'D9';
+        ctx.fill();
+        ctx.restore();
+      });
+    }
+
+    function drawWavy(){
+      ctx.beginPath();
+      for(let i=0;i<N;i++){
+        const ba=-Math.PI/2+i*SA, ma=ba+SA/2, na=-Math.PI/2+(i+1)*SA;
+        const x1=CX+r*Math.cos(ba), y1=CY+r*Math.sin(ba);
+        const cpx=CX+(r+BUMP)*Math.cos(ma), cpy=CY+(r+BUMP)*Math.sin(ma);
+        const x2=CX+r*Math.cos(na), y2=CY+r*Math.sin(na);
+        if(i===0) ctx.moveTo(x1,y1); ctx.quadraticCurveTo(cpx,cpy,x2,y2);
+      }
+      ctx.closePath(); ctx.fillStyle='white'; ctx.fill();
+    }
+
+    function drawLabels(){
+      const ICON_SIZE = 30;
+      pilares.forEach((p,i)=>{
+        const {s,e,mid}=seg(i), isH=hov===i;
+        const ox=isH?Math.cos(mid)*8:0, oy=isH?Math.sin(mid)*8:0;
+        const avail = R - r - BUMP;
+        const ir = r + BUMP + avail * 0.25;
+        const lr = r + BUMP + avail * 0.68;
+
+        const ix=CX+ir*Math.cos(mid)+ox, iy=CY+ir*Math.sin(mid)+oy;
+        if (iconImgs[i].complete && iconImgs[i].naturalWidth > 0) {
+          ctx.drawImage(iconImgs[i], ix-ICON_SIZE/2, iy-ICON_SIZE/2, ICON_SIZE, ICON_SIZE);
+        }
+
+        ctx.save();
+        ctx.translate(CX+lr*Math.cos(mid)+ox, CY+lr*Math.sin(mid)+oy);
+        const textRot = Math.sin(mid) > 0 ? mid + Math.PI * 1.5 : mid + Math.PI * 0.5;
+        ctx.rotate(textRot);
+        ctx.fillStyle='rgba(255,255,255,0.95)';
+        ctx.font='bold 12px sans-serif';
+        ctx.textAlign='center'; ctx.textBaseline='middle';
+        ctx.fillText(p.nome,0,0);
+        ctx.restore();
+      });
+    }
+
+    function drawCenter(){
+      ctx.beginPath();
+      ctx.arc(CX,CY,r-4,0,Math.PI*2);
+      ctx.fillStyle='white'; ctx.fill();
+      if(logoImg.complete && logoImg.naturalWidth>0){
+        ctx.drawImage(logoImg, CX-52, CY-20, 104, 40);
+      } else {
+        ctx.fillStyle='#101A49';
+        ctx.font='bold 20px sans-serif';
+        ctx.textAlign='center'; ctx.textBaseline='middle';
+        ctx.fillText('pipefy',CX,CY-10);
+      }
+      ctx.fillStyle='#005EFC';
+      ctx.font='bold 9.5px sans-serif';
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText('programa de benefícios',CX,CY+27);
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,SIZE,SIZE);
+      drawSegs(); drawWavy(); drawLabels(); drawCenter();
+    }
+
+    function getHov(x,y){
+      const dx=x-CX, dy=y-CY, d=Math.sqrt(dx*dx+dy*dy);
+      if(d<r||d>R) return -1;
+      let a=Math.atan2(dy,dx)+Math.PI/2;
+      if(a<0) a+=Math.PI*2;
+      return Math.floor(a/SA)%N;
+    }
+
+    canvas.addEventListener('mousemove',e=>{
+      const rect=canvas.getBoundingClientRect();
+      const x=(e.clientX-rect.left)*(SIZE/rect.width);
+      const y=(e.clientY-rect.top)*(SIZE/rect.height);
+      const idx=getHov(x,y);
+      if(idx!==hov){ hov=idx; draw(); canvas.style.cursor=idx>=0?'pointer':'default'; }
+    });
+    canvas.addEventListener('mouseleave',()=>{ hov=-1; draw(); canvas.style.cursor='default'; });
+    canvas.addEventListener('click',e=>{
+      const rect=canvas.getBoundingClientRect();
+      const x=(e.clientX-rect.left)*(SIZE/rect.width);
+      const y=(e.clientY-rect.top)*(SIZE/rect.height);
+      const idx=getHov(x,y);
+      if(idx>=0) window.location.href=BASE+'pilares/'+pilares[idx].slug+'.html';
+    });
+
+    draw();
+  })();
+  </script>
 </body>
 </html>
