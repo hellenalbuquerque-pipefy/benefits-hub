@@ -5,32 +5,536 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Pilar Emocional — Benefits Hub Pipefy">
   <title>Pilar Emocional — Benefits Hub Pipefy</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-
-  <!-- ../css porque esta página está dentro de /pilares/ -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    :root { --pilar-color: #FFA726; }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: var(--space-xl);
+    }
+
+    .benefit-grid-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .benefit-grid-card:hover {
+      border-color: var(--pilar-color);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16,26,73,0.07);
+    }
+    .benefit-grid-card.active {
+      border-color: var(--pilar-color);
+      border-width: 2px;
+      background: var(--bg-card-hover);
+    }
+    .benefit-grid-card:focus-visible {
+      outline: 2px solid var(--pilar-color);
+      outline-offset: 2px;
+    }
+
+    .grid-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .grid-card-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border-radius: var(--radius-sm);
+      background: rgba(255,167,38,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .grid-card-arrow {
+      font-size: 1rem; color: var(--text-secondary);
+      transition: color var(--transition), transform var(--transition);
+      margin-top: 0.1rem;
+    }
+    .benefit-grid-card.active .grid-card-arrow,
+    .benefit-grid-card:hover .grid-card-arrow {
+      color: var(--pilar-color);
+      transform: rotate(90deg);
+    }
+    .grid-card-title {
+      font-family: var(--font-heading);
+      font-size: 0.975rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+    .grid-card-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    .grid-card-partner {
+      font-size: 0.7rem; font-weight: 700;
+      color: var(--pilar-color);
+      align-self: flex-start;
+      margin-top: auto;
+    }
+
+    /* Panel */
+    .benefit-detail-panel {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.4s ease;
+    }
+    .benefit-detail-panel.open {
+      grid-template-rows: 1fr;
+    }
+    .panel-inner {
+      overflow: hidden;
+    }
+    .panel-body {
+      background: var(--bg-card);
+      border: 2px solid var(--pilar-color);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin-top: 0.5rem;
+    }
+    .panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .panel-header h2 { font-size: 1.3rem; }
+    .panel-title-row {
+      display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+    }
+    .panel-close {
+      background: none; border: none; cursor: pointer;
+      font-size: 1.1rem; color: var(--text-secondary);
+      padding: 0.2rem 0.4rem; border-radius: 4px;
+      transition: color var(--transition), background var(--transition);
+      flex-shrink: 0;
+    }
+    .panel-close:hover { color: var(--text-primary); background: var(--bg-card-hover); }
+    .panel-close:focus-visible { outline: 2px solid var(--pilar-color); outline-offset: 2px; }
+
+    .panel-layers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+    .panel-layers .layer {
+      padding: 0;
+      border: none;
+    }
+    .panel-layers .layer + .layer {
+      padding-top: 0;
+      border-top: none;
+      border-left: 1px solid var(--border-subtle);
+      padding-left: var(--space-lg);
+    }
+
+    .panel-links {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: var(--space-sm);
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    @media (max-width: 900px) {
+      .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+      .panel-layers { grid-template-columns: 1fr; }
+      .panel-layers .layer + .layer { border-left: none; border-top: 1px solid var(--border-subtle); padding-left: 0; padding-top: var(--space-md); }
+    }
+    @media (max-width: 600px) {
+      .benefit-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-
   <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
-
   <div id="header-placeholder"></div>
 
   <main id="main-content">
-    <div class="page-placeholder">
-      <span class="badge">Em construção</span>
-      <h1>Pilar Emocional</h1>
-      <p>Benefícios que fortalecem resiliência e oferecem apoio para enfrentar desafios.</p>
-    </div>
+
+    <section class="section-dark pilar-hero" aria-labelledby="pilar-title">
+      <div class="container">
+        <span class="pilar-badge">Pilar Emocional</span>
+        <h1 id="pilar-title">Benefícios que fortalecem resiliência e oferecem apoio para enfrentar desafios.</h1>
+        <p class="pilar-desc">Do apoio psicológico às licenças que respeitam os momentos da sua vida — este pilar existe para que você nunca precise enfrentar nada sozinha.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container section">
+        <div class="section-label">9 benefícios</div>
+        <h2>Escolha um benefício para ver os detalhes</h2>
+        <div class="benefit-grid" id="benefit-grid" role="list"></div>
+        <div class="pilar-footer-nav" style="margin-top:var(--space-xl)">
+          <a href="../index.html">← Voltar para a Home</a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <div id="footer-placeholder"></div>
 
-  <!-- BASE = '../' porque estamos dentro de /pilares/ -->
   <script>const BASE = '../';</script>
   <script src="../js/components.js"></script>
+  <script>
+  (function() {
+
+    const PILLAR = '#FFA726';
+
+    const BENEFITS = [
+      {
+        key: 'apoio-psicologico',
+        icon: '🧠',
+        title: 'Apoio Psicológico',
+        partner: 'via Keiken',
+        desc: 'R$ 525/mês subsidiados — use na rede ou por reembolso',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>A Pipefy subsidia até <strong>R$ 525/mês</strong> em sessões de terapia, custeados 100% pela empresa. Use na rede credenciada do app Keiken ou peça reembolso de psicólogos particulares com CRP ativo. O saldo pode ser transferido integralmente para dependentes legais. Sigilo garantido — nenhum tema das sessões é compartilhado com a empresa.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Cuidar da saúde mental é parte essencial do bem-estar integral. O equilíbrio emocional impacta como você vive, trabalha e se relaciona — por isso a Pipefy garante esse acesso de forma acessível, confidencial e sem burocracia.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol><li>Baixe o app Keiken e crie sua conta com o e-mail corporativo.</li><li>Navegue pelos profissionais, escolha e agende.</li><li>No pagamento, selecione "saldo corporativo".</li><li>Para reembolso externo: acesse KeikenPay, informe o valor e anexe o comprovante.</li></ol>`,
+            links: [
+              { label: 'Como criar sua conta', url: 'https://youtu.be/qLJrv15ijZc?feature=shared' },
+              { label: 'Como pedir reembolso', url: 'https://youtu.be/DU31dByynjU?feature=shared' }
+            ]
+          }
+        ],
+        faq: [
+          { q: 'Como funciona o benefício?', a: `<p>A Pipefy disponibiliza R$ 525/mês de subsídio. Você pode usar agendando diretamente pelo app Keiken (saldo debitado automaticamente) ou pedindo reembolso de profissionais externos com CRP ativo. O reembolso incide taxa de 5%.</p>` },
+          { q: 'Meus dependentes podem usar?', a: `<p>Sim! O benefício pode ser transferido integralmente para dependentes legais (cônjuge ou filhos). Fale com o time de C&amp;B informando nome, e-mail e vínculo. A transferência é contínua até você solicitar reversão.</p>` },
+          { q: 'Como funciona a taxa de reembolso?', a: `<p>5% é descontado do seu saldo a cada reembolso. Exemplo com R$ 525 de saldo: pedido de R$ 200 → você recebe R$ 200 no PIX, mas o saldo cai R$ 210. O máximo de uma vez é R$ 498,75.</p>` },
+          { q: 'Como cancelar ou remarcar?', a: `<p>Cancele ou remarque pelo app com até 24 horas de antecedência, sem custo.</p><p><a href="https://youtu.be/pZdDQFsFVJw?feature=shared" target="_blank" rel="noopener">Tutorial →</a></p>` }
+        ]
+      },
+      {
+        key: 'assistencia-pet',
+        icon: '🐾',
+        title: 'Assistência Pet',
+        partner: 'via Meu Pet Club',
+        desc: 'Plano de saúde para cães e gatos — descontado em folha',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>Plano de saúde veterinária para cães e gatos via <strong>Meu Pet Club</strong>. Cobre consultas, vacinas, exames, procedimentos e odontologia, conforme o plano. Você usa a clínica de preferência e pede reembolso. Adesão opcional, desconto em folha. Até 5 pets por colaboradora.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>O vínculo com animais de estimação é parte real do bem-estar emocional. Este benefício garante acesso a cuidados de qualidade sem o peso de custos veterinários imprevistos.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol><li>Preencha o formulário de adesão com seus dados e os do(s) pet(s).</li><li>Solicitações até o dia 25 → plano ativo no dia 1º do mês seguinte.</li><li>Após consulta: solicite laudo + NF ao veterinário e peça reembolso pelo site ou WhatsApp.</li></ol>`,
+            links: [
+              { label: 'Formulário de adesão', url: 'https://form.typeform.com/to/MWgYK1CU' },
+              { label: 'Ver planos e valores', url: 'https://drive.google.com/file/d/16QchII7oRnkjGMOS8YyaA6aebqr--Qo4/view?usp=sharing' }
+            ]
+          }
+        ],
+        faq: [
+          { q: 'Há limite de idade para contratar?', a: `<p>Seu pet deve ter no máximo 14 anos. Até 7 anos, 11 meses e 29 dias: planos Básico, Plus, Total e Top. De 8 a 14 anos: apenas o plano Sênior.</p>` },
+          { q: 'Meu pet tem doença preexistente. Posso contratar?', a: `<p>Sim! Nos primeiros 12 meses, reembolso apenas para doenças súbitas ou emergências. Depois, cobertura da doença preexistente vale integralmente.</p>` },
+          { q: 'Como funciona o cancelamento?', a: `<p>Fidelidade de 12 meses. Se já usou: multa de 50% sobre mensalidades restantes. Se nunca usou: cancelamento isento de multa. Central: 0800 942 4042 · WhatsApp: (41) 3798-5957.</p>` }
+        ]
+      },
+      {
+        key: 'seguro-de-vida',
+        icon: '🛡️',
+        title: 'Seguro de Vida',
+        partner: 'via Prudential',
+        desc: 'Cobertura de 24x o salário base, pago 100% pela Pipefy',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>Seguro de vida custeado 100% pela Pipefy, ativo desde o primeiro dia. Indenização de <strong>24x o salário base</strong> (limite R$ 400.000). Coberturas: morte natural ou acidental, invalidez permanente total ou parcial por acidente, e invalidez funcional por doença. Você escolhe os beneficiários livremente.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Saber que sua família está protegida em imprevistos graves traz tranquilidade emocional no dia a dia. A Pipefy assume 100% do custo para que você não precise se preocupar com isso.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<p>Ativação automática na admissão. Para designar beneficiários: preencha o formulário enviado pelo time de Payroll. Para alterar: acesse o <a href="https://app.pipefy.com/public/form/pdep8lmq" target="_blank" rel="noopener">Pipe Payroll Requests</a>.</p><p style="font-size:0.85rem;margin-top:0.5rem"><strong>Sinistro:</strong> Prudential: 3003 7783 (capitais) · 0800 200 7783 (demais) · +55 21 3003 7783 (exterior).</p>`
+          }
+        ],
+        faq: [
+          { q: 'E se eu não designar beneficiários?', a: `<p>A indenização segue a vocação hereditária do Código Civil: cônjuge, filhos, pais e demais herdeiros. Para garantir que o valor chegue a quem você quer, preencha o formulário de designação.</p>` },
+          { q: 'Quais são todas as coberturas?', a: `<ul><li>Morte natural ou acidental</li><li>Invalidez Permanente Total ou Parcial por Acidente</li><li>Indenização Especial por Morte Acidental</li><li>Invalidez Funcional Permanente Total por Doença</li></ul>` }
+        ]
+      },
+      {
+        key: 'assistencia-funeral',
+        icon: '🕊️',
+        title: 'Assistência Funeral',
+        partner: 'via Prudential',
+        desc: 'Cobertura de até R$ 8.000 — titular, cônjuge e filhos',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>Cobertura complementar ao seguro de vida que cobre despesas com funeral até <strong>R$ 8.000</strong>. Abrange titular, cônjuge ou companheiro(a) e filhos até 21 anos (ou 24 se universitários). Pode ser acionado como prestação de serviço ou reembolso.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Nos momentos mais difíceis, não precisar se preocupar com logística e custos é uma forma concreta de cuidado. Este benefício ampara a família para que ela possa focar no que importa.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<p><strong>Prestação de serviço (recomendado):</strong> ligue para a Prudential e ela cuida de tudo.</p><p style="margin-top:0.5rem"><strong>Reembolso:</strong> pague os custos e solicite depois, mediante NF original. Não há reembolso para Traslado.</p><p style="font-size:0.85rem;margin-top:0.75rem">Prestação de serviço: 3003 7783 · 0800 200 7783 · +55 21 3003 7783<br>Reembolso: 0800 730 0011 – Opção 1.</p>`
+          }
+        ],
+        faq: [
+          { q: 'Quem arca com despesas acima de R$ 8.000?', a: `<p>Todas as despesas que excederem o limite ou serviços não previstos em contrato são de responsabilidade da família.</p>` },
+          { q: 'Quais documentos preciso para reembolso?', a: `<p>Do falecido: RG/CNH, Certidão de Óbito, comprovante de residência. Do responsável: RG/CNH, comprovante de residência, formulário de autorização de crédito em conta. Financeiro: notas fiscais originais com descrição dos serviços. Prazo: até 9 dias úteis após o envio completo.</p>` }
+        ]
+      },
+      {
+        key: 'licenca-casamento',
+        icon: '💍',
+        title: 'Licença Casamento',
+        desc: '7 dias consecutivos — válida por 12 meses',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p><strong>7 dias consecutivos</strong> de licença remunerada para casamento civil ou união estável. Com flexibilidade: o período pode ser escolhido e usufruído em até <strong>12 meses</strong> após a data oficial do evento.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Celebrar um momento tão especial sem preocupações com o trabalho é parte do cuidado com o seu bem-estar. A Pipefy reconhece que os marcos da vida pessoal merecem atenção e presença.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol><li>Envie o documento comprobatório pelo <a href="https://app.pipefy.com/organizations/28/interfaces/328df11f-2476-4de1-8bd9-bf581507f072/pages/674504c4-b009-4bd4-9773-a62fe9efbc1a" target="_blank" rel="noopener">portal Payroll Support</a> em até 48h do evento.</li><li>Solicite o abono no <a href="https://cliente.apdata.com.br/pipefy/index.html" target="_blank" rel="noopener">Apdata</a>.</li><li>Combine com sua liderança o período a utilizar (dentro dos 12 meses).</li></ol><p style="font-size:0.85rem;margin-top:0.75rem;color:var(--text-secondary)">Atenção: se os 12 meses passarem sem usar, o benefício expira.</p>`
+          }
+        ]
+      },
+      {
+        key: 'licenca-parental',
+        icon: '👶',
+        title: 'Licença Parental',
+        desc: 'Maternidade: 180 dias · Paternidade: até 90 dias',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p><strong>Pessoa gestante:</strong> 180 dias, com início a partir do 28º dia antes do parto ou na data do nascimento.</p><p style="margin-top:0.5rem"><strong>Pessoa não gestante:</strong> de 35 a 90 dias conforme tempo de casa (admissões a partir de 01/06/2026). Os 20 primeiros dias são obrigatórios e contínuos; os demais são flexíveis em até 6 meses.</p><p style="margin-top:0.5rem">Aplica-se a nascimento, adoção, guarda judicial e reprodução assistida — de forma isonômica para todos os arranjos familiares.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Os primeiros dias e meses com um filho são insubstituíveis. Uma licença generosa garante que você esteja presente de verdade nesse momento, sem precisar escolher entre família e trabalho.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol><li>Comunique sua liderança e o time de Payroll com antecedência.</li><li>Apresente o documento comprobatório pelo <a href="https://app.pipefy.com/organizations/28/interfaces/328df11f-2476-4de1-8bd9-bf581507f072/pages/674504c4-b009-4bd4-9773-a62fe9efbc1a" target="_blank" rel="noopener">portal Payroll Support</a>.</li></ol>`
+          }
+        ],
+        faq: [
+          { q: 'Meu casal é homoafetivo. Como funciona?', a: `<p>Os benefícios são aplicados de forma isonômica, independentemente de orientação sexual ou composição familiar. A licença de 180 dias é da pessoa gestante ou equiparada; a licença para pessoa não gestante segue as regras de tempo de casa.</p>` },
+          { q: 'Adotei uma criança. Tenho direito?', a: `<p>Sim. Adoção e guarda judicial seguem as mesmas regras. O benefício começa na data de concessão do termo de guarda ou sentença judicial.</p>` },
+          { q: 'Como funcionam os dias flexíveis da licença paternidade?', a: `<p>Os 20 primeiros dias são obrigatórios e contínuos. Os dias adicionais podem ser usados de forma flexível em até 6 meses. Caso não vá usar, formalize a renúncia por e-mail ao time de Payroll.</p>` },
+          { q: 'Entrei antes de 01/06/2026. Quantos dias tenho?', a: `<p>Você segue a política vigente na época da sua contratação. Entre em contato com o time de Payroll para confirmar os dias.</p>` }
+        ]
+      },
+      {
+        key: 'cesta-natalidade',
+        icon: '🎁',
+        title: 'Cesta Natalidade',
+        partner: 'via Prudential + Pipo',
+        desc: 'R$ 350 em cartão por filho — solicite em até 90 dias',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>Cartão benefício com <strong>R$ 350 de crédito único por filho</strong>, vinculado ao Seguro de Vida Prudential. Use em itens de primeira necessidade, alimentação ou farmácia para o bebê.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>A chegada de um filho traz alegria e também novas despesas. Este apoio financeiro é uma forma da Pipefy celebrar e amparar esse momento especial da sua vida.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol><li>Entre em contato com a <strong>Pipo Saúde</strong> via WhatsApp: <a href="https://wa.me/5511942021122" target="_blank" rel="noopener">+55 11 94202-1122</a>.</li><li>Informe que deseja a "Cesta Natalidade da Prudential".</li><li>Tenha em mãos a Certidão de Nascimento.</li></ol><p style="font-size:0.85rem;font-weight:600;color:#E53935;margin-top:0.75rem">Solicite antes do bebê completar 90 dias de vida — pedidos após esse prazo não são processados.</p>`
+          }
+        ]
+      },
+      {
+        key: 'licenca-pet',
+        icon: '🐕',
+        title: 'Licença Pet',
+        desc: '2 dias para adoção ou falecimento de cão ou gato',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p><strong>2 dias consecutivos</strong> de licença remunerada para adoção ou falecimento de cão ou gato. Pode ser usado em até <strong>6 meses</strong> do evento. Nenhuma documentação exigida. Não se aplica a peixes.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>A Pipefy reconhece que tanto a chegada quanto a perda de um pet são eventos emocionalmente significativos. Este benefício garante tempo para vivenciar esse momento com a atenção que ele merece.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol><li>Informe sua liderança imediata sobre o evento.</li><li>Solicite o abono no <a href="https://cliente.apdata.com.br/pipefy/index.html" target="_blank" rel="noopener">Apdata</a>.</li></ol><p style="font-size:0.85rem;color:var(--text-secondary);margin-top:0.5rem">Nenhum documento comprobatório é necessário.</p>`
+          }
+        ]
+      },
+      {
+        key: 'licenca-luto',
+        icon: '🤝',
+        title: 'Licença Luto',
+        desc: '7 dias — 2 imediatos + 5 flexíveis em até 3 meses',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p><strong>7 dias</strong> de licença remunerada para falecimento de familiar direto (pais, avós, filhos, netos, irmãos e cônjuge). <strong>2 dias</strong> obrigatoriamente logo após o falecimento + <strong>5 dias</strong> flexíveis em até 3 meses. Outros vínculos com forte laço afetivo podem ser considerados mediante alinhamento com a liderança.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>O luto tem seu próprio tempo e vai além dos primeiros dias. Esta licença reconhece isso e oferece flexibilidade para que você cuide de si e de quem você ama quando precisar.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol><li>Comunique sua liderança imediatamente.</li><li>Apresente o atestado de óbito e solicite o abono no <a href="https://cliente.apdata.com.br/pipefy/index.html" target="_blank" rel="noopener">Apdata</a>.</li><li>Alinhe com sua liderança como distribuir os 5 dias flexíveis.</li></ol>`
+          }
+        ]
+      }
+    ];
+
+    const grid = document.getElementById('benefit-grid');
+    let activeKey = null;
+    let activePanel = null;
+
+    function renderCard(b) {
+      const card = document.createElement('div');
+      card.className = 'benefit-grid-card';
+      card.setAttribute('role', 'listitem');
+      card.setAttribute('tabindex', '0');
+      card.dataset.key = b.key;
+      card.innerHTML = `
+        <div class="grid-card-top">
+          <div class="grid-card-icon">${b.icon}</div>
+          <span class="grid-card-arrow">›</span>
+        </div>
+        <div class="grid-card-title">${b.title}</div>
+        <div class="grid-card-desc">${b.desc}</div>
+        ${b.partner ? `<div class="grid-card-partner">${b.partner}</div>` : ''}
+      `;
+      card.addEventListener('click', () => togglePanel(b.key, card));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePanel(b.key, card); } });
+      return card;
+    }
+
+    function renderPanelContent(b) {
+      let layersHtml = b.layers.map((l, i) => {
+        const linksHtml = l.links ? `<div class="panel-links">${l.links.map(lk => `<a href="${lk.url}" class="action-link" target="_blank" rel="noopener">${lk.label}</a>`).join('')}</div>` : '';
+        return `<div class="layer">${i === 0 ? '' : ''}<span class="layer-label">${l.label}</span>${l.html}${linksHtml}</div>`;
+      }).join('');
+
+      let faqHtml = '';
+      if (b.faq && b.faq.length) {
+        faqHtml = `<div class="faq-section"><div class="faq-section-label">Perguntas frequentes</div><div class="faq-list">${b.faq.map(f => `
+          <div class="faq-item">
+            <button class="faq-btn" aria-expanded="false">${f.q} <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="faq-panel" role="region"><div class="faq-panel-inner">${f.a}</div></div>
+          </div>`).join('')}</div></div>`;
+      }
+
+      return `
+        <div class="panel-body">
+          <div class="panel-header">
+            <div class="panel-title-row">
+              <h2>${b.title}</h2>
+              ${b.partner ? `<span class="benefit-partner">${b.partner}</span>` : ''}
+            </div>
+            <button class="panel-close" aria-label="Fechar painel">✕</button>
+          </div>
+          <div class="panel-layers">${layersHtml}</div>
+          ${faqHtml}
+        </div>`;
+    }
+
+    function getLastCardInRow(clickedCard) {
+      const cards = [...grid.querySelectorAll('.benefit-grid-card')];
+      const top = clickedCard.getBoundingClientRect().top;
+      let last = clickedCard;
+      cards.forEach(c => {
+        if (Math.abs(c.getBoundingClientRect().top - top) < 5) {
+          if (c.getBoundingClientRect().left >= last.getBoundingClientRect().left) last = c;
+        }
+      });
+      return last;
+    }
+
+    function closePanel() {
+      if (!activePanel) return;
+      activePanel.classList.remove('open');
+      const prev = activePanel;
+      setTimeout(() => { if (prev.parentNode) prev.remove(); }, 400);
+      activePanel = null;
+      grid.querySelectorAll('.benefit-grid-card.active').forEach(c => c.classList.remove('active'));
+      activeKey = null;
+    }
+
+    function togglePanel(key, clickedCard) {
+      if (activeKey === key) { closePanel(); return; }
+      closePanel();
+      activeKey = key;
+      const b = BENEFITS.find(x => x.key === key);
+      const panel = document.createElement('div');
+      panel.className = 'benefit-detail-panel';
+      panel.innerHTML = `<div class="panel-inner">${renderPanelContent(b)}</div>`;
+      const lastCard = getLastCardInRow(clickedCard);
+      lastCard.insertAdjacentElement('afterend', panel);
+      activePanel = panel;
+      clickedCard.classList.add('active');
+      panel.querySelector('.panel-close').addEventListener('click', closePanel);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => panel.classList.add('open'));
+      });
+      setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+      panel.querySelectorAll('.faq-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.faq-item');
+          const fp = item.querySelector('.faq-panel');
+          const isOpen = item.classList.contains('open');
+          panel.querySelectorAll('.faq-item.open').forEach(o => {
+            o.classList.remove('open');
+            o.querySelector('.faq-panel').style.maxHeight = null;
+            o.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            item.classList.add('open');
+            fp.style.maxHeight = fp.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    }
+
+    BENEFITS.forEach(b => grid.appendChild(renderCard(b)));
+
+  })();
+  </script>
 </body>
 </html>
