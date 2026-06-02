@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pilar Social — Benefits Hub Pipefy">
+  <title>Pilar Social — Benefits Hub Pipefy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    :root { --pilar-color: #26A69A; }
+
+    .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: var(--space-xl); }
+    .benefit-grid-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; cursor: pointer; transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition); display: flex; flex-direction: column; gap: 0.6rem; }
+    .benefit-grid-card:hover { border-color: var(--pilar-color); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,26,73,0.07); }
+    .benefit-grid-card.active { border-color: var(--pilar-color); border-width: 2px; background: var(--bg-card-hover); }
+    .benefit-grid-card:focus-visible { outline: 2px solid var(--pilar-color); outline-offset: 2px; }
+    .grid-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; }
+    .grid-card-icon { width: 40px; height: 40px; flex-shrink: 0; border-radius: var(--radius-sm); background: rgba(38,166,154,0.12); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(38,166,154,0.2); }
+    .grid-card-icon svg { width: 18px; height: 18px; stroke: #26A69A; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+    .grid-card-arrow { font-size: 1rem; color: var(--text-secondary); transition: color var(--transition), transform var(--transition); margin-top: 0.1rem; }
+    .benefit-grid-card.active .grid-card-arrow, .benefit-grid-card:hover .grid-card-arrow { color: var(--pilar-color); transform: rotate(90deg); }
+    .grid-card-title { font-family: var(--font-heading); font-size: 0.975rem; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+    .grid-card-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; }
+    .grid-card-partner { font-size: 0.7rem; font-weight: 700; color: var(--pilar-color); align-self: flex-start; margin-top: auto; }
+
+    .benefit-detail-panel { grid-column: 1 / -1; display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s ease; }
+    .benefit-detail-panel.open { grid-template-rows: 1fr; }
+    .panel-inner { overflow: hidden; }
+    .panel-body { background: var(--bg-card); border: 2px solid var(--pilar-color); border-radius: var(--radius-md); padding: var(--space-lg); margin-top: 0.5rem; }
+    .panel-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-lg); padding-bottom: var(--space-md); border-bottom: 1px solid var(--border-subtle); }
+    .panel-header h2 { font-size: 1.3rem; }
+    .panel-title-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .panel-close { background: none; border: none; cursor: pointer; font-size: 1.1rem; color: var(--text-secondary); padding: 0.2rem 0.4rem; border-radius: 4px; transition: color var(--transition), background var(--transition); flex-shrink: 0; }
+    .panel-close:hover { color: var(--text-primary); background: var(--bg-card-hover); }
+    .panel-close:focus-visible { outline: 2px solid var(--pilar-color); outline-offset: 2px; }
+    .panel-layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); margin-bottom: var(--space-lg); }
+    .panel-layers .layer { padding: 0; border: none; }
+    .panel-layers .layer + .layer { border-left: 1px solid var(--border-subtle); padding-left: var(--space-lg); }
+    .panel-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: var(--space-sm); padding-top: var(--space-sm); border-top: 1px solid var(--border-subtle); }
+
+    @media (max-width: 900px) {
+      .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+      .panel-layers { grid-template-columns: 1fr; }
+      .panel-layers .layer + .layer { border-left: none; border-top: 1px solid var(--border-subtle); padding-left: 0; padding-top: var(--space-md); }
+    }
+    @media (max-width: 600px) { .benefit-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+  <div id="header-placeholder"></div>
+
+  <main id="main-content">
+
+    <section class="section-dark pilar-hero" aria-labelledby="pilar-title">
+      <div class="container">
+        <span class="pilar-badge">Pilar Social</span>
+        <h1 id="pilar-title">Benefícios que equilibram vida pessoal e profissional.</h1>
+        <p class="pilar-desc">Flexibilidade, autonomia e momentos de descanso fazem parte de uma vida saudável. Este pilar garante espaço para você respirar, se reconectar e aproveitar o tempo fora do trabalho.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container section">
+        <div class="section-label">4 benefícios</div>
+        <h2>Escolha um benefício para ver os detalhes</h2>
+        <div class="benefit-grid" id="benefit-grid" role="list"></div>
+        <div class="pilar-footer-nav" style="margin-top:var(--space-xl)">
+          <a href="../index.html">← Voltar para a Home</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script>const BASE = '../';</script>
+  <script src="../js/components.js"></script>
+  <script>
+  (function() {
+
+    const BENEFITS = [
+      {
+        key: 'day-off',
+        icon: 'day-off',
+        title: 'Day Off de Aniversário',
+        desc: 'Um dia de folga remunerada no mês do seu aniversário',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>1 dia de folga remunerada para usar no mês do seu aniversário. A data é você quem escolhe, alinhando com a liderança com pelo menos uma semana de antecedência.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Celebrar a sua vida é um ato de cuidado. A Pipefy reconhece que aniversário é um momento pessoal que merece atenção, não apenas mais um dia de trabalho.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol>
+              <li>Escolha a data dentro do mês do aniversário e alinhe com sua liderança com pelo menos 1 semana de antecedência.</li>
+              <li>Solicite o abono no <a href="https://cliente.apdata.com.br/pipefy/index.html" target="_blank" rel="noopener">Apdata</a> selecionando a opção "Day Off".</li>
+            </ol>
+            <p style="font-size:0.85rem;font-weight:600;color:#E53935;margin-top:0.75rem">Atenção: o benefício não é cumulativo. Se não for usado no mês do aniversário, expira automaticamente.</p>`
+          }
+        ]
+      },
+      {
+        key: 'horario-flexivel',
+        icon: 'horario-flexivel',
+        title: 'Horário de Trabalho Flexível',
+        desc: 'Autonomia para organizar sua jornada dentro da carga semanal',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>Você gerencia seu horário de entrada e saída, respeitando a carga horária semanal contratada (ex: 40h semanais) e a presença nos rituais do time. Não há janela de horário fixa. A única restrição é não iniciar ou estender a jornada entre 22h e 5h, exceto em situações emergenciais aprovadas pela liderança.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Autonomia sobre o próprio tempo reduz estresse e melhora o equilíbrio entre vida pessoal e profissional. Poder adaptar a rotina a compromissos, preferências e contextos é uma forma concreta de respeito.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<p>Converse com sua liderança para alinhar combinados sobre disponibilidade e comunicação assíncrona. Não há solicitação formal, basta o alinhamento prévio.</p>`
+          }
+        ]
+      },
+      {
+        key: 'conta-pipefy',
+        icon: 'conta-pipefy',
+        title: 'Conta Pessoal no Pipefy',
+        desc: 'Licença Enterprise gratuita para uso pessoal',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>Uma licença gratuita do plano Pipefy Enterprise para uso pessoal, com possibilidade de convidar até 10 membros externos para colaborar. A licença fica ativa enquanto durar o vínculo com a empresa. O cadastro deve ser feito com e-mail pessoal (Gmail, Outlook etc.), não funciona com e-mail corporativo.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Usar o Pipefy para organizar a vida pessoal (projetos, tarefas, rotinas) reduz a carga mental e a ansiedade. E conhecer o produto de dentro é uma vantagem real no dia a dia profissional.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol>
+              <li>Acesse o link de cadastro com o cupom já aplicado.</li>
+              <li>Cadastre-se com seu e-mail pessoal (não o @pipefy.com).</li>
+              <li>No campo "How many users do you need?", insira 10.</li>
+              <li>Conclua o cadastro e a licença estará ativa.</li>
+            </ol>`,
+            links: [
+              { label: 'Cadastrar com cupom honeybadger26', url: 'https://app.pipefy.com/subscriptions/enterprise-base-monthly?coupon=honeybadger26' }
+            ]
+          }
+        ]
+      },
+      {
+        key: 'viagens',
+        icon: 'viagens',
+        title: 'Desconto em Viagens e Hospedagens',
+        partner: 'via OnHappy',
+        desc: 'Tarifas corporativas para passagens e hotéis + R$ 100 de boas-vindas',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>Acesso à plataforma OnHappy (parceria com Onfly) para reservar passagens aéreas e hospedagens com tarifas corporativas negociadas pela Pipefy, mais competitivas que as do mercado aberto. Para uso exclusivamente pessoal. Ao ativar o cadastro, você recebe <strong>R$ 100 de crédito inicial</strong> para usar na primeira compra, com validade de 3 meses a partir da ativação.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Descanso e lazer são parte essencial do bem-estar. Ter acesso a tarifas melhores torna o planejamento das férias mais acessível e o tempo fora do trabalho mais aproveitado.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol>
+              <li>Acesse <a href="https://app.onhappy.com.br/start" target="_blank" rel="noopener">app.onhappy.com.br/start</a></li>
+              <li>Preencha seu perfil com dados pessoais.</li>
+              <li>Defina suas preferências de viagem.</li>
+              <li>O voucher de R$ 100 é ativado automaticamente ao concluir o cadastro.</li>
+            </ol>
+            <p style="font-size:0.85rem;font-weight:600;color:#E53935;margin-top:0.75rem">Atenção: o voucher expira em 3 meses se não for utilizado.</p>`
+          }
+        ]
+      }
+    ];
+
+    const ICONS = {
+      'day-off': '<path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 3v4M8 3v4"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>',
+      'horario-flexivel': '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+      'conta-pipefy': '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3"/><path d="M17 14v7"/><path d="M14 17h7"/>',
+      'viagens': '<path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19 4c-1 0-2 .5-2.5 1L13 9.2l-8.2-1.8L3 9l7 4-2 3-4 1 1 2 4-1 4 7 2-2z"/>',
+    };
+
+    const grid = document.getElementById('benefit-grid');
+    let activeKey = null, activePanel = null;
+
+    function renderCard(b) {
+      const card = document.createElement('div');
+      card.className = 'benefit-grid-card';
+      card.setAttribute('role', 'listitem');
+      card.setAttribute('tabindex', '0');
+      card.dataset.key = b.key;
+      card.innerHTML = `
+        <div class="grid-card-top">
+          <div class="grid-card-icon"><svg viewBox="0 0 24 24">${ICONS[b.icon] || ''}</svg></div>
+          <span class="grid-card-arrow">›</span>
+        </div>
+        <div class="grid-card-title">${b.title}</div>
+        <div class="grid-card-desc">${b.desc}</div>
+        ${b.partner ? `<div class="grid-card-partner">${b.partner}</div>` : ''}
+      `;
+      card.addEventListener('click', () => togglePanel(b.key, card));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePanel(b.key, card); } });
+      return card;
+    }
+
+    function renderPanelContent(b) {
+      const layersHtml = b.layers.map((l) => {
+        const linksHtml = l.links ? `<div class="panel-links">${l.links.map(lk => `<a href="${lk.url}" class="action-link" target="_blank" rel="noopener">${lk.label}</a>`).join('')}</div>` : '';
+        return `<div class="layer"><span class="layer-label">${l.label}</span>${l.html}${linksHtml}</div>`;
+      }).join('');
+
+      return `<div class="panel-body">
+        <div class="panel-header">
+          <div class="panel-title-row">
+            <h2>${b.title}</h2>
+            ${b.partner ? `<span class="benefit-partner">${b.partner}</span>` : ''}
+          </div>
+          <button class="panel-close" aria-label="Fechar painel">✕</button>
+        </div>
+        <div class="panel-layers">${layersHtml}</div>
+      </div>`;
+    }
+
+    function getLastCardInRow(clickedCard) {
+      const cards = [...grid.querySelectorAll('.benefit-grid-card')];
+      const top = clickedCard.getBoundingClientRect().top;
+      let last = clickedCard;
+      cards.forEach(c => {
+        if (Math.abs(c.getBoundingClientRect().top - top) < 5 && c.getBoundingClientRect().left >= last.getBoundingClientRect().left) last = c;
+      });
+      return last;
+    }
+
+    function closePanel() {
+      if (!activePanel) return;
+      activePanel.classList.remove('open');
+      const prev = activePanel;
+      setTimeout(() => { if (prev.parentNode) prev.remove(); }, 400);
+      activePanel = null;
+      grid.querySelectorAll('.benefit-grid-card.active').forEach(c => c.classList.remove('active'));
+      activeKey = null;
+    }
+
+    function togglePanel(key, clickedCard) {
+      if (activeKey === key) { closePanel(); return; }
+      closePanel();
+      activeKey = key;
+      const b = BENEFITS.find(x => x.key === key);
+      const panel = document.createElement('div');
+      panel.className = 'benefit-detail-panel';
+      panel.innerHTML = `<div class="panel-inner">${renderPanelContent(b)}</div>`;
+      getLastCardInRow(clickedCard).insertAdjacentElement('afterend', panel);
+      activePanel = panel;
+      clickedCard.classList.add('active');
+      panel.querySelector('.panel-close').addEventListener('click', closePanel);
+      requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.add('open')));
+      setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+    }
+
+    BENEFITS.forEach(b => grid.appendChild(renderCard(b)));
+
+  })();
+  </script>
+</body>
+</html>
