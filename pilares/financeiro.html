@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pilar Financeiro — Benefits Hub Pipefy">
+  <title>Pilar Financeiro — Benefits Hub Pipefy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    :root { --pilar-color: #4CAF50; }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: var(--space-xl);
+    }
+    .benefit-grid-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .benefit-grid-card:hover {
+      border-color: var(--pilar-color);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16,26,73,0.07);
+    }
+    .benefit-grid-card.active {
+      border-color: var(--pilar-color);
+      border-width: 2px;
+      background: var(--bg-card-hover);
+    }
+    .benefit-grid-card:focus-visible {
+      outline: 2px solid var(--pilar-color);
+      outline-offset: 2px;
+    }
+    .grid-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .grid-card-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border-radius: var(--radius-sm);
+      background: rgba(76,175,80,0.12);
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(76,175,80,0.2);
+    }
+    .grid-card-icon svg {
+      width: 18px; height: 18px;
+      stroke: #4CAF50; fill: none;
+      stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .grid-card-arrow {
+      font-size: 1rem; color: var(--text-secondary);
+      transition: color var(--transition), transform var(--transition);
+      margin-top: 0.1rem;
+    }
+    .benefit-grid-card.active .grid-card-arrow,
+    .benefit-grid-card:hover .grid-card-arrow { color: var(--pilar-color); transform: rotate(90deg); }
+    .grid-card-title { font-family: var(--font-heading); font-size: 0.975rem; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+    .grid-card-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; }
+    .grid-card-partner { font-size: 0.7rem; font-weight: 700; color: var(--pilar-color); align-self: flex-start; margin-top: auto; }
+
+    .benefit-detail-panel { grid-column: 1 / -1; display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s ease; }
+    .benefit-detail-panel.open { grid-template-rows: 1fr; }
+    .panel-inner { overflow: hidden; }
+    .panel-body { background: var(--bg-card); border: 2px solid var(--pilar-color); border-radius: var(--radius-md); padding: var(--space-lg); margin-top: 0.5rem; }
+    .panel-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-lg); padding-bottom: var(--space-md); border-bottom: 1px solid var(--border-subtle); }
+    .panel-header h2 { font-size: 1.3rem; }
+    .panel-title-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .panel-close { background: none; border: none; cursor: pointer; font-size: 1.1rem; color: var(--text-secondary); padding: 0.2rem 0.4rem; border-radius: 4px; transition: color var(--transition), background var(--transition); flex-shrink: 0; }
+    .panel-close:hover { color: var(--text-primary); background: var(--bg-card-hover); }
+    .panel-close:focus-visible { outline: 2px solid var(--pilar-color); outline-offset: 2px; }
+    .panel-layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); margin-bottom: var(--space-lg); }
+    .panel-layers .layer { padding: 0; border: none; }
+    .panel-layers .layer + .layer { border-left: 1px solid var(--border-subtle); padding-left: var(--space-lg); }
+    .panel-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: var(--space-sm); padding-top: var(--space-sm); border-top: 1px solid var(--border-subtle); }
+
+    @media (max-width: 900px) {
+      .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+      .panel-layers { grid-template-columns: 1fr; }
+      .panel-layers .layer + .layer { border-left: none; border-top: 1px solid var(--border-subtle); padding-left: 0; padding-top: var(--space-md); }
+    }
+    @media (max-width: 600px) { .benefit-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+  <div id="header-placeholder"></div>
+
+  <main id="main-content">
+
+    <section class="section-dark pilar-hero" aria-labelledby="pilar-title">
+      <div class="container">
+        <span class="pilar-badge">Pilar Financeiro</span>
+        <h1 id="pilar-title">Benefícios que reduzem a pressão financeira e geram segurança no dia a dia.</h1>
+        <p class="pilar-desc">Do cartão multibenefícios aos auxílios diretos, estruturamos uma rede de suporte financeiro para que você viva o presente e planeje o futuro com segurança.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container section">
+        <div class="section-label">6 benefícios</div>
+        <h2>Escolha um benefício para ver os detalhes</h2>
+        <div class="benefit-grid" id="benefit-grid" role="list"></div>
+        <div class="pilar-footer-nav" style="margin-top:var(--space-xl)">
+          <a href="../index.html">← Voltar para a Home</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script>const BASE = '../';</script>
+  <script src="../js/components.js"></script>
+  <script>
+  (function() {
+
+    const BENEFITS = [
+      {
+        key: 'caju',
+        icon: 'caju',
+        title: 'Alimentação, Mobilidade, Saúde, Cultura e Educação',
+        partner: 'via Caju',
+        desc: 'R$ 1.965/mês em 5 carteiras flexíveis',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>Um único cartão multibenefícios (bandeira VISA) com cinco carteiras. O saldo do mês seguinte fica disponível todo dia 20. Total mensal: <strong>R$ 1.965</strong>, distribuídos assim:</p>
+              <ul style="margin-top:0.5rem">
+                <li><strong>Alimentação: R$ 1.280</strong> (saldo exclusivo, não transferível por lei)</li>
+                <li><strong>Educação/Saldo Caju: R$ 307</strong> (mais versátil: boletos, PIX e saque)</li>
+                <li><strong>Mobilidade: R$ 252</strong> (flexível entre alimentação, saúde e cultura)</li>
+                <li><strong>Saúde: R$ 63</strong> (flexível entre alimentação, mobilidade e cultura)</li>
+                <li><strong>Cultura: R$ 63</strong> (flexível entre alimentação, mobilidade e saúde)</li>
+              </ul>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Ter suporte financeiro para alimentação, transporte, saúde e lazer reduz a pressão do dia a dia e libera energia para o que importa. O Caju foi escolhido pela flexibilidade: você decide como usar dentro das categorias disponíveis.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol>
+              <li>Na admissão, você recebe o cartão físico no endereço cadastrado.</li>
+              <li>Instale o app Caju, cadastre sua senha e configure transferências entre carteiras.</li>
+              <li>Use o cartão nas funções <strong>crédito ou voucher</strong> nos estabelecimentos de cada categoria.</li>
+              <li>Para transferir saldo entre carteiras flexíveis, acesse o app antes de usar.</li>
+            </ol>`
+          }
+        ],
+        faq: [
+          { q: 'Posso usar a carteira de Alimentação no mercado?', a: `<p>Sim. O saldo de Alimentação funciona em restaurantes, lanchonetes, padarias, supermercados, açougues, hortifrutis e apps de delivery (iFood, Uber Eats, Rappi etc.).</p>` },
+          { q: 'Posso transferir saldo entre todas as carteiras?', a: `<p>Não completamente. O saldo de Alimentação (R$ 1.280) é travado por lei e não pode ser transferido. As carteiras de Mobilidade, Saúde e Cultura são flexíveis entre si. O Saldo Caju/Educação é isolado: não recebe transferências das outras carteiras e também não envia para elas, mas permite transferências para contas externas via PIX, boletos e saques em caixas 24 Horas.</p>` },
+          { q: 'O saldo não usado acumula para o mês seguinte?', a: `<p>Sim, o saldo acumula e não expira no fim do mês.</p>` },
+          { q: 'O que acontece com o saldo se eu for desligado(a)?', a: `<p>O saldo remanescente não é descontado na rescisão e pode ser usado normalmente após o desligamento.</p>` },
+          { q: 'O Caju é descontado do salário?', a: `<p>Não. Os valores do Caju não integram o salário e não sofrem encargos trabalhistas.</p>` },
+          { q: 'Quais são as opções de pagamento no cartão?', a: `<p>Crédito e voucher. O cartão não possui função débito.</p>` },
+          { q: 'Perdi o cartão. O que faço?', a: `<p>Entre em contato com a central do Caju para solicitar cancelamento e segunda via.</p>` }
+        ]
+      },
+      {
+        key: 'home-office',
+        icon: 'home-office',
+        title: 'Ajuda de Custo Home Office',
+        desc: 'R$ 270/mês para quem trabalha remoto ou híbrido',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p><strong>R$ 270 mensais</strong> creditados em folha de pagamento para cobrir despesas de energia elétrica, internet e infraestrutura básica do home office. O valor não integra o salário. Elegível para contratos remotos e híbridos. Colaboradores 100% presenciais não recebem, pois utilizam a infraestrutura do escritório.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Trabalhar de casa tem custos reais. Esse auxílio reconhece isso e garante que a escolha pelo modelo remoto ou híbrido não pese no seu bolso.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<p>O valor é creditado automaticamente em folha todo mês, sem solicitação ou comprovação. Se seu modelo de contrato mudar para remoto ou híbrido, comunique o time de Payroll para ativar o benefício.</p>`
+          }
+        ]
+      },
+      {
+        key: 'escolaridade',
+        icon: 'escolaridade',
+        title: 'Assistência Escolaridade Infantil e Babá',
+        desc: 'R$ 450/mês por filho de 4 meses a 10 anos',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p><strong>R$ 450 mensais por filho(a)</strong> para apoiar com escola, creche ou babá. Elegível para crianças de 4 meses até 10 anos completos. Para filhos com deficiência (PCD), o benefício se estende até os 16 anos. O benefício não é cumulativo: você escolhe entre Escolaridade (escola/creche) ou Babá. Creditado em folha com caráter indenizatório.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Conciliar carreira e parentalidade é mais leve quando os custos com cuidado e educação das crianças têm suporte. Este auxílio é parte do compromisso da Pipefy com famílias em todas as fases.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol>
+              <li>Acesse o portal Payroll Support e selecione "Auxílio Creche/Babá/Educação Infantil".</li>
+              <li>Escolha a modalidade e envie a documentação:
+                <ul style="margin-top:0.3rem;margin-left:1rem">
+                  <li>Escolaridade: comprovante de matrícula ou declaração da escola.</li>
+                  <li>Babá: CTPS/eSocial ou contrato de prestação de serviços com CPF/RG e assinatura.</li>
+                </ul>
+              </li>
+              <li>Para filhos PCD: laudo médico apresentado uma única vez na solicitação inicial.</li>
+              <li>Novos colaboradores enviam a documentação no onboarding para início imediato.</li>
+            </ol>`
+          }
+        ],
+        faq: [
+          { q: 'Preciso renovar todo semestre?', a: `<p>Sim. O time de Payroll entra em contato para lembrar, mas os comprovantes precisam ser enviados até <strong>10 de janeiro</strong> e <strong>10 de julho</strong> de cada ano para garantir a continuidade do pagamento.</p>` },
+          { q: 'Tenho dois filhos elegíveis. Recebo o dobro?', a: `<p>Sim, o valor é por filho. Dois filhos elegíveis = R$ 900/mês.</p>` },
+          { q: 'Posso trocar de modalidade?', a: `<p>Sim. Ao trocar de Escolaridade para Babá (ou vice-versa), a modalidade anterior é cancelada, pois o benefício não é cumulativo.</p>` }
+        ]
+      },
+      {
+        key: 'nutricional',
+        icon: 'nutricional',
+        title: 'Assistência Nutricional Complementar',
+        desc: 'R$ 242/mês por bebê no primeiro ano de vida',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p><strong>R$ 242 mensais por criança</strong>, do nascimento até completar 1 ano, para apoiar com a compra de alimentação complementar: leite, fórmulas e papinhas. Creditado em folha. Aplica-se também a adoção, mediante Termo de Adoção.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>O primeiro ano de vida de um bebê tem demandas financeiras específicas. Este auxílio garante que você tenha suporte nessa fase tão especial.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol>
+              <li>Acesse o portal Payroll Support e solicite o benefício.</li>
+              <li>Anexe a Certidão de Nascimento ou o Termo de Adoção.</li>
+              <li>Após validação, o pagamento entra na próxima folha vigente.</li>
+              <li>O benefício encerra automaticamente quando a criança completa 1 ano.</li>
+            </ol>`
+          }
+        ]
+      },
+      {
+        key: 'antecipacao',
+        icon: 'antecipacao',
+        title: 'Antecipação Salarial',
+        partner: 'via Creditas',
+        desc: 'Antecipe parte do seu salário quando precisar',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>Se surgir uma emergência, imprevisto ou oportunidade ao longo do mês, você pode antecipar parte do salário pelo app Creditas. É um benefício exclusivo para colaboradores de empresas parceiras. O desconto é feito diretamente em folha de pagamento e o valor cai via PIX na hora após aprovação. Consulte o app para verificar as condições e taxas aplicáveis.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Ter acesso ao próprio salário antes do dia de pagamento, de forma rápida e transparente, é muito diferente de recorrer a outras alternativas. É uma ferramenta para momentos que não podem esperar.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol>
+              <li>Baixe o app Creditas Benefícios.</li>
+              <li>Crie seu cadastro ou faça login.</li>
+              <li>Procure por "Antecipação de salário" e insira seus dados.</li>
+              <li>Aprovado: o valor cai via PIX na hora.</li>
+            </ol>
+            <p style="font-size:0.85rem;color:var(--text-secondary);margin-top:0.75rem">Dúvidas: (11) 3164-1402 (SP capital) · 4003-1586 (demais regiões metropolitanas) · 0800 721 8547 (demais localidades). Segunda a sexta, 8h às 20h.</p>`
+          }
+        ]
+      },
+      {
+        key: 'educacao-financeira',
+        icon: 'educacao-financeira',
+        title: 'Educação Financeira',
+        partner: 'via Creditas',
+        desc: 'Materiais e conteúdos para gerir suas finanças com autonomia',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>Acesso a materiais e conteúdos educativos da Creditas para ajudar você a gerir suas finanças de forma proativa: organizar receitas e despesas, criar orçamentos e planejar o futuro com mais segurança.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Benefícios financeiros são mais poderosos quando combinados com conhecimento. A educação financeira desenvolve autonomia e consciência sobre o dinheiro, dois ingredientes essenciais para o bem-estar no longo prazo.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<p>Acesse o programa diretamente pelo link abaixo. Não é necessário nenhum cadastro prévio.</p>`,
+            links: [
+              { label: 'Acessar programa de educação financeira', url: 'https://www.creditas.com/programa-educacao-financeira?utm_source=farming&utm_medium=rh&utm_campaign=f-edufin' }
+            ]
+          }
+        ]
+      }
+    ];
+
+    const ICONS = {
+      'caju': '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/>',
+      'home-office': '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+      'escolaridade': '<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
+      'nutricional': '<path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/>',
+      'antecipacao': '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+      'educacao-financeira': '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+    };
+
+    const grid = document.getElementById('benefit-grid');
+    let activeKey = null, activePanel = null;
+
+    function renderCard(b) {
+      const card = document.createElement('div');
+      card.className = 'benefit-grid-card';
+      card.setAttribute('role', 'listitem');
+      card.setAttribute('tabindex', '0');
+      card.dataset.key = b.key;
+      card.innerHTML = `
+        <div class="grid-card-top">
+          <div class="grid-card-icon"><svg viewBox="0 0 24 24">${ICONS[b.icon] || ''}</svg></div>
+          <span class="grid-card-arrow">›</span>
+        </div>
+        <div class="grid-card-title">${b.title}</div>
+        <div class="grid-card-desc">${b.desc}</div>
+        ${b.partner ? `<div class="grid-card-partner">${b.partner}</div>` : ''}
+      `;
+      card.addEventListener('click', () => togglePanel(b.key, card));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePanel(b.key, card); } });
+      return card;
+    }
+
+    function renderPanelContent(b) {
+      const layersHtml = b.layers.map((l, i) => {
+        const linksHtml = l.links ? `<div class="panel-links">${l.links.map(lk => `<a href="${lk.url}" class="action-link" target="_blank" rel="noopener">${lk.label}</a>`).join('')}</div>` : '';
+        return `<div class="layer"><span class="layer-label">${l.label}</span>${l.html}${linksHtml}</div>`;
+      }).join('');
+
+      let faqHtml = '';
+      if (b.faq && b.faq.length) {
+        faqHtml = `<div class="faq-section"><div class="faq-section-label">Perguntas frequentes</div><div class="faq-list">${b.faq.map(f => `
+          <div class="faq-item">
+            <button class="faq-btn" aria-expanded="false">${f.q} <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="faq-panel" role="region"><div class="faq-panel-inner">${f.a}</div></div>
+          </div>`).join('')}</div></div>`;
+      }
+
+      return `<div class="panel-body">
+        <div class="panel-header">
+          <div class="panel-title-row">
+            <h2>${b.title}</h2>
+            ${b.partner ? `<span class="benefit-partner">${b.partner}</span>` : ''}
+          </div>
+          <button class="panel-close" aria-label="Fechar painel">✕</button>
+        </div>
+        <div class="panel-layers">${layersHtml}</div>
+        ${faqHtml}
+      </div>`;
+    }
+
+    function getLastCardInRow(clickedCard) {
+      const cards = [...grid.querySelectorAll('.benefit-grid-card')];
+      const top = clickedCard.getBoundingClientRect().top;
+      let last = clickedCard;
+      cards.forEach(c => {
+        if (Math.abs(c.getBoundingClientRect().top - top) < 5 && c.getBoundingClientRect().left >= last.getBoundingClientRect().left) last = c;
+      });
+      return last;
+    }
+
+    function closePanel() {
+      if (!activePanel) return;
+      activePanel.classList.remove('open');
+      const prev = activePanel;
+      setTimeout(() => { if (prev.parentNode) prev.remove(); }, 400);
+      activePanel = null;
+      grid.querySelectorAll('.benefit-grid-card.active').forEach(c => c.classList.remove('active'));
+      activeKey = null;
+    }
+
+    function togglePanel(key, clickedCard) {
+      if (activeKey === key) { closePanel(); return; }
+      closePanel();
+      activeKey = key;
+      const b = BENEFITS.find(x => x.key === key);
+      const panel = document.createElement('div');
+      panel.className = 'benefit-detail-panel';
+      panel.innerHTML = `<div class="panel-inner">${renderPanelContent(b)}</div>`;
+      getLastCardInRow(clickedCard).insertAdjacentElement('afterend', panel);
+      activePanel = panel;
+      clickedCard.classList.add('active');
+      panel.querySelector('.panel-close').addEventListener('click', closePanel);
+      requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.add('open')));
+      setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+      panel.querySelectorAll('.faq-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.faq-item');
+          const fp = item.querySelector('.faq-panel');
+          const isOpen = item.classList.contains('open');
+          panel.querySelectorAll('.faq-item.open').forEach(o => {
+            o.classList.remove('open');
+            o.querySelector('.faq-panel').style.maxHeight = null;
+            o.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            item.classList.add('open');
+            fp.style.maxHeight = fp.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    }
+
+    BENEFITS.forEach(b => grid.appendChild(renderCard(b)));
+
+  })();
+  </script>
+</body>
+</html>
