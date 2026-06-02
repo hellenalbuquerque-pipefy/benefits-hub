@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pilar Físico — Benefits Hub Pipefy">
+  <title>Pilar Físico — Benefits Hub Pipefy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    :root { --pilar-color: #E91E8C; }
+
+    .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: var(--space-xl); }
+    .benefit-grid-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; cursor: pointer; transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition); display: flex; flex-direction: column; gap: 0.6rem; }
+    .benefit-grid-card:hover { border-color: var(--pilar-color); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,26,73,0.07); }
+    .benefit-grid-card.active { border-color: var(--pilar-color); border-width: 2px; background: var(--bg-card-hover); }
+    .benefit-grid-card:focus-visible { outline: 2px solid var(--pilar-color); outline-offset: 2px; }
+    .grid-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; }
+    .grid-card-icon { width: 40px; height: 40px; flex-shrink: 0; border-radius: var(--radius-sm); background: rgba(233,30,140,0.1); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(233,30,140,0.18); }
+    .grid-card-icon svg { width: 18px; height: 18px; stroke: #E91E8C; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+    .grid-card-arrow { font-size: 1rem; color: var(--text-secondary); transition: color var(--transition), transform var(--transition); margin-top: 0.1rem; }
+    .benefit-grid-card.active .grid-card-arrow, .benefit-grid-card:hover .grid-card-arrow { color: var(--pilar-color); transform: rotate(90deg); }
+    .grid-card-title { font-family: var(--font-heading); font-size: 0.975rem; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+    .grid-card-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; }
+    .grid-card-partner { font-size: 0.7rem; font-weight: 700; color: var(--pilar-color); align-self: flex-start; margin-top: auto; }
+
+    .benefit-detail-panel { grid-column: 1 / -1; display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s ease; }
+    .benefit-detail-panel.open { grid-template-rows: 1fr; }
+    .panel-inner { overflow: hidden; }
+    .panel-body { background: var(--bg-card); border: 2px solid var(--pilar-color); border-radius: var(--radius-md); padding: var(--space-lg); margin-top: 0.5rem; }
+    .panel-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-lg); padding-bottom: var(--space-md); border-bottom: 1px solid var(--border-subtle); }
+    .panel-header h2 { font-size: 1.3rem; }
+    .panel-title-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .panel-close { background: none; border: none; cursor: pointer; font-size: 1.1rem; color: var(--text-secondary); padding: 0.2rem 0.4rem; border-radius: 4px; transition: color var(--transition), background var(--transition); flex-shrink: 0; }
+    .panel-close:hover { color: var(--text-primary); background: var(--bg-card-hover); }
+    .panel-close:focus-visible { outline: 2px solid var(--pilar-color); outline-offset: 2px; }
+    .panel-layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); margin-bottom: var(--space-lg); }
+    .panel-layers .layer { padding: 0; border: none; }
+    .panel-layers .layer + .layer { border-left: 1px solid var(--border-subtle); padding-left: var(--space-lg); }
+    .panel-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: var(--space-sm); padding-top: var(--space-sm); border-top: 1px solid var(--border-subtle); }
+
+    @media (max-width: 900px) {
+      .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+      .panel-layers { grid-template-columns: 1fr; }
+      .panel-layers .layer + .layer { border-left: none; border-top: 1px solid var(--border-subtle); padding-left: 0; padding-top: var(--space-md); }
+    }
+    @media (max-width: 600px) { .benefit-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+  <div id="header-placeholder"></div>
+
+  <main id="main-content">
+
+    <section class="section-dark pilar-hero" aria-labelledby="pilar-title">
+      <div class="container">
+        <span class="pilar-badge">Pilar Físico</span>
+        <h1 id="pilar-title">Benefícios que cuidam da sua saúde de forma integral.</h1>
+        <p class="pilar-desc">Corpo e mente são interdependentes. Vitalidade física apoia clareza mental e gestão do estresse. Este pilar garante acesso a cuidados preventivos, suporte médico e práticas que fortalecem seu bem-estar.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container section">
+        <div class="section-label">4 benefícios</div>
+        <h2>Escolha um benefício para ver os detalhes</h2>
+        <div class="benefit-grid" id="benefit-grid" role="list"></div>
+        <div class="pilar-footer-nav" style="margin-top:var(--space-xl)">
+          <a href="../index.html">← Voltar para a Home</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script>const BASE = '../';</script>
+  <script src="../js/components.js"></script>
+  <script>
+  (function() {
+
+    const PAYROLL = 'https://app.pipefy.com/organizations/28/interfaces/328df11f-2476-4de1-8bd9-bf581507f072/pages/674504c4-b009-4bd4-9773-a62fe9efbc1a';
+
+    const BENEFITS = [
+      {
+        key: 'plano-saude',
+        icon: 'plano-saude',
+        title: 'Plano de Saúde',
+        desc: '100% subsidiado pela Pipefy, cobertura nacional para titular e dependentes',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>A Pipefy custeia 100% da mensalidade para titular e dependentes (cônjuge/companheiro(a) e filhos). Você escolhe entre duas operadoras na admissão:</p>
+              <ul style="margin-top:0.5rem">
+                <li><strong>SulAmérica Saúde:</strong> filhos cobertos até 24 anos</li>
+                <li><strong>Seguros Unimed:</strong> filhos cobertos até 30 anos</li>
+              </ul>
+              <p style="margin-top:0.5rem">Ambos com abrangência nacional e acomodação em apartamento. Coparticipação de 20% em consultas, exames simples, terapias e pronto-socorro, descontada em folha somente quando houver uso. Internações não têm coparticipação (exceto psiquiátrica acima de 30 dias).</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Saber que você e sua família têm cobertura integral traz tranquilidade real no dia a dia. A Pipefy assume 100% do custo para que saúde nunca seja um obstáculo.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol>
+              <li>Na admissão, escolha a operadora (SulAmérica ou Unimed) no Formulário de Admissão.</li>
+              <li>Para incluir dependentes: faça na admissão ou em até 30 dias de eventos como nascimento ou casamento via <a href="${PAYROLL}" target="_blank" rel="noopener">portal Payroll Support</a>. Solicitações fora do prazo ficam sujeitas a carências.</li>
+              <li>Para usar fora da rede credenciada: pague a consulta e solicite reembolso direto no app SulAmérica ou Super App Unimed.</li>
+            </ol>`
+          }
+        ],
+        faq: [
+          { q: 'Posso recusar o plano?', a: `<p>Sim, se já tiver plano ativo. Envie carta de próprio punho e comprovante de cobertura ao time de Payroll via <a href="${PAYROLL}" target="_blank" rel="noopener">portal Payroll Support</a>.</p>` },
+          { q: 'O que acontece com o plano se eu for desligado(a)?', a: `<p>O benefício cessa no último dia trabalhado. Você pode optar por manter o plano arcando com o custo integral, desde que tenha contribuído com coparticipação (Lei 9656/98).</p>` },
+          { q: 'Posso mudar de operadora depois?', a: `<p>A escolha é feita na admissão. Para dúvidas sobre alterações, entre em contato com o time de Payroll.</p>` }
+        ]
+      },
+      {
+        key: 'plano-odonto',
+        icon: 'plano-odonto',
+        title: 'Plano Odontológico',
+        desc: '100% subsidiado, titular e dependentes até 18 anos',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>A Pipefy custeia 100% da mensalidade para titular e dependentes (cônjuge/companheiro(a) e filhos até 18 anos). Duas modalidades disponíveis:</p>
+              <ul style="margin-top:0.5rem">
+                <li><strong>SulAmérica Odonto Nacional:</strong> elegível para todas as pessoas colaboradoras.</li>
+                <li><strong>Unimed Odonto (Essencial RB):</strong> concedido automaticamente para quem escolher o plano de saúde da Unimed.</li>
+              </ul>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Saúde bucal faz parte da saúde integral. Ter acesso a tratamentos preventivos e corretivos sem custo é uma forma concreta de cuidado que impacta qualidade de vida.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol>
+              <li>A inclusão do titular é automática na admissão.</li>
+              <li>Para incluir dependentes: faça na admissão ou em até 30 dias de eventos como nascimento ou casamento via <a href="${PAYROLL}" target="_blank" rel="noopener">portal Payroll Support</a>.</li>
+              <li>Para cancelar: apresente comprovante de outro plano odontológico ativo ao time de Payroll.</li>
+            </ol>`
+          }
+        ]
+      },
+      {
+        key: 'pipo',
+        icon: 'pipo',
+        title: 'Pipo Saúde',
+        partner: 'via Pipo Saúde',
+        desc: 'Seu concierge de saúde — médicos e enfermeiros para te orientar',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>A Pipo Saúde é a parceira oficial de gestão de benefícios da Pipefy. Funciona como um concierge: médicos e enfermeiros disponíveis para te ajudar a navegar pelo plano e oferecer orientação clínica primária. Atende titulares e dependentes vinculados aos planos de saúde e odontológico.</p>
+              <p style="margin-top:0.75rem"><strong>O que a Pipo FAZ:</strong> tira dúvidas sobre coberturas, indica médicos e hospitais da rede, faz triagem de sintomas, orienta sobre reembolso e solicita exames de rotina.</p>
+              <p style="margin-top:0.5rem"><strong>O que a Pipo NÃO FAZ:</strong> agendar consultas, solicitar reembolso em seu nome, fazer alterações cadastrais, garantir liberação de procedimentos. Em emergências, vá ao PS imediatamente.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Saber para quem ligar quando você não sabe o que fazer é um suporte enorme. A Pipo elimina a burocracia e coloca um time de saúde real do seu lado, sem custo adicional.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<p><strong>WhatsApp:</strong> <a href="https://wa.me/5511942021122" target="_blank" rel="noopener">+55 11 94202-1122</a></p>
+              <p style="margin-top:0.5rem"><strong>Web:</strong> <a href="https://membro.piposaude.com.br" target="_blank" rel="noopener">membro.piposaude.com.br</a></p>
+              <p style="margin-top:0.75rem;font-size:0.85rem;color:var(--text-secondary)">Dúvidas administrativas: seg. a sex., 9h às 18h. Triagem clínica: 24h, seg. a sex.</p>`
+          }
+        ]
+      },
+      {
+        key: 'wellhub',
+        icon: 'wellhub',
+        title: 'Wellhub',
+        partner: 'via Wellhub',
+        desc: 'Starter e Basic gratuitos — academias, estúdios e apps de bem-estar',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>Acesso a uma rede de academias, estúdios, personal trainers e apps de bem-estar em todo o Brasil. Adesão opcional, sem carência. A Pipefy custeia 100% dos planos de entrada:</p>
+              <ul style="margin-top:0.5rem">
+                <li>Starter: <strong>gratuito</strong></li>
+                <li>Basic: <strong>gratuito</strong></li>
+                <li>Basic+: R$ 10,09/mês</li>
+                <li>Silver: R$ 60,09/mês</li>
+                <li>Silver+: R$ 110,09/mês</li>
+                <li>Gold: R$ 230,09/mês · Gold+: R$ 350,09/mês</li>
+                <li>Platinum: R$ 510,09/mês · Diamond: R$ 610,09/mês · Diamond+: R$ 690,09/mês</li>
+              </ul>
+              <p style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-secondary)">Dependentes legais (cônjuge e filhos) podem ser incluídos pelo titular no app, pelos valores de mercado da plataforma.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Exercício regular melhora humor, qualidade do sono e reduz tensão. Ter acesso a modalidades variadas — do app de meditação à academia presencial — facilita encontrar o que funciona para você.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol>
+              <li>Baixe o app Wellhub.</li>
+              <li>Cadastre-se com seu e-mail corporativo ou CPF.</li>
+              <li>Escolha o plano e ative. Para planos pagos, o desconto pode ser feito em folha ou por cartão direto na plataforma.</li>
+            </ol>`
+          }
+        ]
+      }
+    ];
+
+    const ICONS = {
+      'plano-saude': '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
+      'plano-odonto': '<path d="M12 2a5 5 0 0 0-5 5c0 1.5.5 3 1.5 4.5L12 22l3.5-10.5C16.5 10 17 8.5 17 7a5 5 0 0 0-5-5z"/>',
+      'pipo': '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+      'wellhub': '<path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>',
+    };
+
+    const grid = document.getElementById('benefit-grid');
+    let activeKey = null, activePanel = null;
+
+    function renderCard(b) {
+      const card = document.createElement('div');
+      card.className = 'benefit-grid-card';
+      card.setAttribute('role', 'listitem');
+      card.setAttribute('tabindex', '0');
+      card.dataset.key = b.key;
+      card.innerHTML = `
+        <div class="grid-card-top">
+          <div class="grid-card-icon"><svg viewBox="0 0 24 24">${ICONS[b.icon] || ''}</svg></div>
+          <span class="grid-card-arrow">›</span>
+        </div>
+        <div class="grid-card-title">${b.title}</div>
+        <div class="grid-card-desc">${b.desc}</div>
+        ${b.partner ? `<div class="grid-card-partner">${b.partner}</div>` : ''}
+      `;
+      card.addEventListener('click', () => togglePanel(b.key, card));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePanel(b.key, card); } });
+      return card;
+    }
+
+    function renderPanelContent(b) {
+      const layersHtml = b.layers.map((l) => {
+        const linksHtml = l.links ? `<div class="panel-links">${l.links.map(lk => `<a href="${lk.url}" class="action-link" target="_blank" rel="noopener">${lk.label}</a>`).join('')}</div>` : '';
+        return `<div class="layer"><span class="layer-label">${l.label}</span>${l.html}${linksHtml}</div>`;
+      }).join('');
+
+      let faqHtml = '';
+      if (b.faq && b.faq.length) {
+        faqHtml = `<div class="faq-section"><div class="faq-section-label">Perguntas frequentes</div><div class="faq-list">${b.faq.map(f => `
+          <div class="faq-item">
+            <button class="faq-btn" aria-expanded="false">${f.q} <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="faq-panel" role="region"><div class="faq-panel-inner">${f.a}</div></div>
+          </div>`).join('')}</div></div>`;
+      }
+
+      return `<div class="panel-body">
+        <div class="panel-header">
+          <div class="panel-title-row">
+            <h2>${b.title}</h2>
+            ${b.partner ? `<span class="benefit-partner">${b.partner}</span>` : ''}
+          </div>
+          <button class="panel-close" aria-label="Fechar painel">✕</button>
+        </div>
+        <div class="panel-layers">${layersHtml}</div>
+        ${faqHtml}
+      </div>`;
+    }
+
+    function getLastCardInRow(clickedCard) {
+      const cards = [...grid.querySelectorAll('.benefit-grid-card')];
+      const top = clickedCard.getBoundingClientRect().top;
+      let last = clickedCard;
+      cards.forEach(c => {
+        if (Math.abs(c.getBoundingClientRect().top - top) < 5 && c.getBoundingClientRect().left >= last.getBoundingClientRect().left) last = c;
+      });
+      return last;
+    }
+
+    function closePanel() {
+      if (!activePanel) return;
+      activePanel.classList.remove('open');
+      const prev = activePanel;
+      setTimeout(() => { if (prev.parentNode) prev.remove(); }, 400);
+      activePanel = null;
+      grid.querySelectorAll('.benefit-grid-card.active').forEach(c => c.classList.remove('active'));
+      activeKey = null;
+    }
+
+    function togglePanel(key, clickedCard) {
+      if (activeKey === key) { closePanel(); return; }
+      closePanel();
+      activeKey = key;
+      const b = BENEFITS.find(x => x.key === key);
+      const panel = document.createElement('div');
+      panel.className = 'benefit-detail-panel';
+      panel.innerHTML = `<div class="panel-inner">${renderPanelContent(b)}</div>`;
+      getLastCardInRow(clickedCard).insertAdjacentElement('afterend', panel);
+      activePanel = panel;
+      clickedCard.classList.add('active');
+      panel.querySelector('.panel-close').addEventListener('click', closePanel);
+      requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.add('open')));
+      setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+      panel.querySelectorAll('.faq-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.faq-item');
+          const fp = item.querySelector('.faq-panel');
+          const isOpen = item.classList.contains('open');
+          panel.querySelectorAll('.faq-item.open').forEach(o => {
+            o.classList.remove('open');
+            o.querySelector('.faq-panel').style.maxHeight = null;
+            o.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            item.classList.add('open');
+            fp.style.maxHeight = fp.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    }
+
+    BENEFITS.forEach(b => grid.appendChild(renderCard(b)));
+
+  })();
+  </script>
+</body>
+</html>
