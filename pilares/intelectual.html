@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pilar Intelectual — Benefits Hub Pipefy">
+  <title>Pilar Intelectual — Benefits Hub Pipefy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    :root { --pilar-color: #E53935; }
+
+    .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: var(--space-xl); }
+    .benefit-grid-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; cursor: pointer; transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition); display: flex; flex-direction: column; gap: 0.6rem; }
+    .benefit-grid-card:hover { border-color: var(--pilar-color); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,26,73,0.07); }
+    .benefit-grid-card.active { border-color: var(--pilar-color); border-width: 2px; background: var(--bg-card-hover); }
+    .benefit-grid-card:focus-visible { outline: 2px solid var(--pilar-color); outline-offset: 2px; }
+    .grid-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; }
+    .grid-card-icon { width: 40px; height: 40px; flex-shrink: 0; border-radius: var(--radius-sm); background: rgba(229,57,53,0.1); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(229,57,53,0.18); }
+    .grid-card-icon svg { width: 18px; height: 18px; stroke: #E53935; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+    .grid-card-arrow { font-size: 1rem; color: var(--text-secondary); transition: color var(--transition), transform var(--transition); margin-top: 0.1rem; }
+    .benefit-grid-card.active .grid-card-arrow, .benefit-grid-card:hover .grid-card-arrow { color: var(--pilar-color); transform: rotate(90deg); }
+    .grid-card-title { font-family: var(--font-heading); font-size: 0.975rem; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+    .grid-card-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; }
+    .grid-card-partner { font-size: 0.7rem; font-weight: 700; color: var(--pilar-color); align-self: flex-start; margin-top: auto; }
+
+    .benefit-detail-panel { grid-column: 1 / -1; display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s ease; }
+    .benefit-detail-panel.open { grid-template-rows: 1fr; }
+    .panel-inner { overflow: hidden; }
+    .panel-body { background: var(--bg-card); border: 2px solid var(--pilar-color); border-radius: var(--radius-md); padding: var(--space-lg); margin-top: 0.5rem; }
+    .panel-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-lg); padding-bottom: var(--space-md); border-bottom: 1px solid var(--border-subtle); }
+    .panel-header h2 { font-size: 1.3rem; }
+    .panel-title-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .panel-close { background: none; border: none; cursor: pointer; font-size: 1.1rem; color: var(--text-secondary); padding: 0.2rem 0.4rem; border-radius: 4px; transition: color var(--transition), background var(--transition); flex-shrink: 0; }
+    .panel-close:hover { color: var(--text-primary); background: var(--bg-card-hover); }
+    .panel-close:focus-visible { outline: 2px solid var(--pilar-color); outline-offset: 2px; }
+    .panel-layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); margin-bottom: var(--space-lg); }
+    .panel-layers .layer { padding: 0; border: none; }
+    .panel-layers .layer + .layer { border-left: 1px solid var(--border-subtle); padding-left: var(--space-lg); }
+    .panel-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: var(--space-sm); padding-top: var(--space-sm); border-top: 1px solid var(--border-subtle); }
+    .partner-block { padding: 0.75rem; background: var(--bg-card-hover); border-radius: var(--radius-sm); margin-top: 0.75rem; }
+    .partner-block-title { font-weight: 700; font-size: 0.875rem; color: var(--pilar-color); margin-bottom: 0.4rem; }
+
+    @media (max-width: 900px) {
+      .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+      .panel-layers { grid-template-columns: 1fr; }
+      .panel-layers .layer + .layer { border-left: none; border-top: 1px solid var(--border-subtle); padding-left: 0; padding-top: var(--space-md); }
+    }
+    @media (max-width: 600px) { .benefit-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+  <div id="header-placeholder"></div>
+
+  <main id="main-content">
+
+    <section class="section-dark pilar-hero" aria-labelledby="pilar-title">
+      <div class="container">
+        <span class="pilar-badge">Pilar Intelectual</span>
+        <h1 id="pilar-title">Benefícios que apoiam seu crescimento contínuo.</h1>
+        <p class="pilar-desc">O aprendizado contínuo evita estagnação, reduz ansiedade e reforça propósito e autoestima. Este pilar garante acesso a ferramentas, subsídios e parcerias para você se desenvolver no seu próprio ritmo.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container section">
+        <div class="section-label">4 benefícios</div>
+        <h2>Escolha um benefício para ver os detalhes</h2>
+        <div class="benefit-grid" id="benefit-grid" role="list"></div>
+        <div class="pilar-footer-nav" style="margin-top:var(--space-xl)">
+          <a href="../index.html">← Voltar para a Home</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script>const BASE = '../';</script>
+  <script src="../js/components.js"></script>
+  <script>
+  (function() {
+
+    const REIMBURSEMENT = 'https://app.pipefy.com/public/form/7Up3CYPW?utm_source=pipefy-ai';
+
+    const BENEFITS = [
+      {
+        key: 'auxilio-educacao',
+        icon: 'auxilio-educacao',
+        title: 'Auxílio Educação',
+        desc: 'R$ 307/mês no Saldo Caju para cursos, graduação e livros',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p><strong>R$ 307 mensais</strong> no Saldo Caju para uso em educação. Válido para graduação, pós-graduação, cursos de especialização, idiomas, cursos de bem-estar (culinária etc.) e livros. Use diretamente pelo cartão Caju ou solicite reembolso pelo Pipe Reimbursement Request com recibo ou nota fiscal.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Remover a barreira financeira do aprendizado é um investimento no seu desenvolvimento. Com esse subsídio, você escolhe o que estudar e quando, sem precisar justificar a escolha.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol>
+              <li>Use o cartão Caju diretamente em plataformas e instituições que o aceitem.</li>
+              <li>Para compras que não aceitam o cartão: pague e solicite reembolso pelo <a href="${REIMBURSEMENT}" target="_blank" rel="noopener">Pipe Reimbursement Request</a> com recibo ou NF.</li>
+            </ol>`
+          }
+        ]
+      },
+      {
+        key: 'udemy',
+        icon: 'udemy',
+        title: 'Udemy Business',
+        desc: 'Acesso gratuito e ilimitado a milhares de cursos',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>Licença corporativa da Udemy Business com acesso ilimitado a milhares de cursos para desenvolver hard e soft skills. A Pipefy adota uma política de uso ativo para garantir que as licenças fiquem com quem está estudando de verdade:</p>
+              <ul style="margin-top:0.5rem">
+                <li>Ative sua conta em até <strong>30 dias</strong> após receber o convite.</li>
+                <li>Consuma no mínimo <strong>1 hora de conteúdo por mês</strong> para manter a licença.</li>
+                <li>Licenças inativas são desativadas automaticamente. Para reativar, aguarde 1 mês e solicite novamente.</li>
+              </ul>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Acesso ilimitado a cursos de tecnologia, gestão, design, idiomas e muito mais. Aprender de forma autônoma e no próprio ritmo é um dos pilares da cultura da Pipefy — Learning Diamond é um dos nossos valores.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol>
+              <li>Solicite sua licença pelo Pipe Udemy Usability (primeira vez ou reativação).</li>
+              <li>Ative a conta em até 30 dias após receber o e-mail de boas-vindas.</li>
+              <li>Dúvidas sobre trilhas de aprendizado: fale com o time de Learning &amp; Development.</li>
+            </ol>`
+          }
+        ]
+      },
+      {
+        key: 'parceria-idiomas',
+        icon: 'parceria-idiomas',
+        title: 'Parcerias em Idiomas',
+        partner: 'Beetools · Rockfeller',
+        desc: 'Descontos exclusivos em inglês com aulas online',
+        layers: [
+          {
+            label: 'Beetools',
+            html: `<p>Aulas individuais de inglês com metodologia interativa, Realidade Virtual e app. Agendamento flexível, foco em fluência em 18 meses. Planos com desconto Pipefy:</p>
+              <ul style="margin-top:0.5rem">
+                <li><strong>BeeEssencial</strong> (6 aulas/mês): R$ 254,15</li>
+                <li><strong>BeeSmart</strong> (8 aulas/mês): R$ 295,20</li>
+                <li><strong>BeeBlack</strong> (12 aulas/mês): R$ 479,20 — inclui exame TOEIC ou TOEFL ITP</li>
+                <li><strong>BeeFast</strong> (30 aulas/mês, intensivo): R$ 1.119,20</li>
+              </ul>
+              <p style="margin-top:0.75rem;font-size:0.85rem">Contato: <a href="https://wa.me/5541991825351" target="_blank" rel="noopener">(41) 99182-5351</a> · <a href="https://www.beetoolscuritiba.com.br" target="_blank" rel="noopener">beetoolscuritiba.com.br</a></p>`
+          },
+          {
+            label: 'Rockfeller',
+            html: `<p>Turmas reduzidas (até 8 alunos), método face-to-face e conteúdo online. Do básico à fluência em 2,5 anos. <strong>40% de desconto</strong> no curso, extensível a familiares:</p>
+              <ul style="margin-top:0.5rem">
+                <li><strong>Upper Intermediate</strong> (18 meses): 18x de R$ 270 + taxa de adesão R$ 250 + material R$ 594/semestre</li>
+                <li><strong>Fluency</strong> (30 meses): 30x de R$ 270 + taxa de adesão R$ 250 + material R$ 594/semestre</li>
+              </ul>
+              <p style="margin-top:0.75rem;font-size:0.85rem">Contato: <a href="https://wa.me/5541987151854" target="_blank" rel="noopener">(41) 98715-1854</a></p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Inglês é uma habilidade que abre portas profissionais e pessoais. Ter acesso a condições especiais por ser colaborador Pipefy torna esse investimento mais acessível — e você pode estudar de onde estiver.</p>`
+          }
+        ]
+      },
+      {
+        key: 'parceria-tech',
+        icon: 'parceria-tech',
+        title: 'Parcerias em Tech e Gestão',
+        partner: 'EBAC · FIAP',
+        desc: 'Até 40% de desconto em cursos, MBAs e graduações',
+        layers: [
+          {
+            label: 'EBAC',
+            html: `<p>Mais de 150 cursos nas áreas de Design, Audiovisual, Programação &amp; Data, Games, Marketing, Negócios e Fashion. <strong>40% de desconto</strong> exclusivo para colaboradores.</p>
+              <p style="margin-top:0.5rem">Use o Promocode <strong>parceria_pipefy</strong> ao se inscrever para ativar o desconto.</p>
+              <p style="margin-top:0.75rem;font-size:0.85rem">Dúvidas: <a href="https://wa.me/551142002991" target="_blank" rel="noopener">(11) 4200-2991</a></p>`
+          },
+          {
+            label: 'FIAP',
+            html: `<p>Descontos em múltiplos formatos (não cumulativos com outras bolsas):</p>
+              <ul style="margin-top:0.5rem">
+                <li><strong>MBA+, Pós Tech, Graduação online, SHIFT:</strong> 20% OFF</li>
+                <li><strong>Graduação presencial, FIAP School, Módulo:</strong> 10% OFF</li>
+              </ul>
+              <p style="margin-top:0.5rem;font-size:0.85rem">Para solicitar, envie holerite recente ou CTPS (CLT) / contrato de prestação de serviços (PJ) para o canal da sua modalidade:</p>
+              <ul style="margin-top:0.3rem;font-size:0.85rem">
+                <li>MBA: atendimento@fiap.com.br</li>
+                <li>Pós Tech: atendimento.postech@fiap.com.br</li>
+                <li>Graduação / FIAP School: helpcenter@fiap.com.br</li>
+                <li>SHIFT: shift@fiap.com.br</li>
+                <li>Dúvidas gerais: parceria@fiap.com.br · <a href="https://wa.me/5511981700028" target="_blank" rel="noopener">(11) 98170-0028</a></li>
+              </ul>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Desenvolver competências técnicas e de gestão nunca foi tão necessário. Esses descontos reduzem o custo de cursos e graduações de referência no mercado — de tecnologia e dados a design e negócios.</p>`
+          }
+        ]
+      }
+    ];
+
+    const ICONS = {
+      'auxilio-educacao': '<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
+      'udemy': '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+      'parceria-idiomas': '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+      'parceria-tech': '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+    };
+
+    const grid = document.getElementById('benefit-grid');
+    let activeKey = null, activePanel = null;
+
+    function renderCard(b) {
+      const card = document.createElement('div');
+      card.className = 'benefit-grid-card';
+      card.setAttribute('role', 'listitem');
+      card.setAttribute('tabindex', '0');
+      card.dataset.key = b.key;
+      card.innerHTML = `
+        <div class="grid-card-top">
+          <div class="grid-card-icon"><svg viewBox="0 0 24 24">${ICONS[b.icon] || ''}</svg></div>
+          <span class="grid-card-arrow">›</span>
+        </div>
+        <div class="grid-card-title">${b.title}</div>
+        <div class="grid-card-desc">${b.desc}</div>
+        ${b.partner ? `<div class="grid-card-partner">${b.partner}</div>` : ''}
+      `;
+      card.addEventListener('click', () => togglePanel(b.key, card));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePanel(b.key, card); } });
+      return card;
+    }
+
+    function renderPanelContent(b) {
+      const layersHtml = b.layers.map((l) => {
+        const linksHtml = l.links ? `<div class="panel-links">${l.links.map(lk => `<a href="${lk.url}" class="action-link" target="_blank" rel="noopener">${lk.label}</a>`).join('')}</div>` : '';
+        return `<div class="layer"><span class="layer-label">${l.label}</span>${l.html}${linksHtml}</div>`;
+      }).join('');
+
+      let faqHtml = '';
+      if (b.faq && b.faq.length) {
+        faqHtml = `<div class="faq-section"><div class="faq-section-label">Perguntas frequentes</div><div class="faq-list">${b.faq.map(f => `
+          <div class="faq-item">
+            <button class="faq-btn" aria-expanded="false">${f.q} <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="faq-panel" role="region"><div class="faq-panel-inner">${f.a}</div></div>
+          </div>`).join('')}</div></div>`;
+      }
+
+      return `<div class="panel-body">
+        <div class="panel-header">
+          <div class="panel-title-row">
+            <h2>${b.title}</h2>
+            ${b.partner ? `<span class="benefit-partner">${b.partner}</span>` : ''}
+          </div>
+          <button class="panel-close" aria-label="Fechar painel">✕</button>
+        </div>
+        <div class="panel-layers">${layersHtml}</div>
+        ${faqHtml}
+      </div>`;
+    }
+
+    function getLastCardInRow(clickedCard) {
+      const cards = [...grid.querySelectorAll('.benefit-grid-card')];
+      const top = clickedCard.getBoundingClientRect().top;
+      let last = clickedCard;
+      cards.forEach(c => {
+        if (Math.abs(c.getBoundingClientRect().top - top) < 5 && c.getBoundingClientRect().left >= last.getBoundingClientRect().left) last = c;
+      });
+      return last;
+    }
+
+    function closePanel() {
+      if (!activePanel) return;
+      activePanel.classList.remove('open');
+      const prev = activePanel;
+      setTimeout(() => { if (prev.parentNode) prev.remove(); }, 400);
+      activePanel = null;
+      grid.querySelectorAll('.benefit-grid-card.active').forEach(c => c.classList.remove('active'));
+      activeKey = null;
+    }
+
+    function togglePanel(key, clickedCard) {
+      if (activeKey === key) { closePanel(); return; }
+      closePanel();
+      activeKey = key;
+      const b = BENEFITS.find(x => x.key === key);
+      const panel = document.createElement('div');
+      panel.className = 'benefit-detail-panel';
+      panel.innerHTML = `<div class="panel-inner">${renderPanelContent(b)}</div>`;
+      getLastCardInRow(clickedCard).insertAdjacentElement('afterend', panel);
+      activePanel = panel;
+      clickedCard.classList.add('active');
+      panel.querySelector('.panel-close').addEventListener('click', closePanel);
+      requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.add('open')));
+      setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+      panel.querySelectorAll('.faq-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.faq-item');
+          const fp = item.querySelector('.faq-panel');
+          const isOpen = item.classList.contains('open');
+          panel.querySelectorAll('.faq-item.open').forEach(o => {
+            o.classList.remove('open');
+            o.querySelector('.faq-panel').style.maxHeight = null;
+            o.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            item.classList.add('open');
+            fp.style.maxHeight = fp.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    }
+
+    BENEFITS.forEach(b => grid.appendChild(renderCard(b)));
+
+  })();
+  </script>
+</body>
+</html>
