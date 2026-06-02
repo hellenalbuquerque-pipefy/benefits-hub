@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pilar Ocupacional — Benefits Hub Pipefy">
+  <title>Pilar Ocupacional — Benefits Hub Pipefy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    :root { --pilar-color: #8E24AA; }
+
+    .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: var(--space-xl); }
+    .benefit-grid-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; cursor: pointer; transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition); display: flex; flex-direction: column; gap: 0.6rem; }
+    .benefit-grid-card:hover { border-color: var(--pilar-color); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,26,73,0.07); }
+    .benefit-grid-card.active { border-color: var(--pilar-color); border-width: 2px; background: var(--bg-card-hover); }
+    .benefit-grid-card:focus-visible { outline: 2px solid var(--pilar-color); outline-offset: 2px; }
+    .grid-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; }
+    .grid-card-icon { width: 40px; height: 40px; flex-shrink: 0; border-radius: var(--radius-sm); background: rgba(142,36,170,0.1); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(142,36,170,0.18); }
+    .grid-card-icon svg { width: 18px; height: 18px; stroke: #8E24AA; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+    .grid-card-arrow { font-size: 1rem; color: var(--text-secondary); transition: color var(--transition), transform var(--transition); margin-top: 0.1rem; }
+    .benefit-grid-card.active .grid-card-arrow, .benefit-grid-card:hover .grid-card-arrow { color: var(--pilar-color); transform: rotate(90deg); }
+    .grid-card-title { font-family: var(--font-heading); font-size: 0.975rem; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+    .grid-card-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; }
+    .grid-card-partner { font-size: 0.7rem; font-weight: 700; color: var(--pilar-color); align-self: flex-start; margin-top: auto; }
+
+    .benefit-detail-panel { grid-column: 1 / -1; display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s ease; }
+    .benefit-detail-panel.open { grid-template-rows: 1fr; }
+    .panel-inner { overflow: hidden; }
+    .panel-body { background: var(--bg-card); border: 2px solid var(--pilar-color); border-radius: var(--radius-md); padding: var(--space-lg); margin-top: 0.5rem; }
+    .panel-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-lg); padding-bottom: var(--space-md); border-bottom: 1px solid var(--border-subtle); }
+    .panel-header h2 { font-size: 1.3rem; }
+    .panel-title-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .panel-close { background: none; border: none; cursor: pointer; font-size: 1.1rem; color: var(--text-secondary); padding: 0.2rem 0.4rem; border-radius: 4px; transition: color var(--transition), background var(--transition); flex-shrink: 0; }
+    .panel-close:hover { color: var(--text-primary); background: var(--bg-card-hover); }
+    .panel-close:focus-visible { outline: 2px solid var(--pilar-color); outline-offset: 2px; }
+    .panel-layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); margin-bottom: var(--space-lg); }
+    .panel-layers .layer { padding: 0; border: none; }
+    .panel-layers .layer + .layer { border-left: 1px solid var(--border-subtle); padding-left: var(--space-lg); }
+    .panel-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: var(--space-sm); padding-top: var(--space-sm); border-top: 1px solid var(--border-subtle); }
+
+    @media (max-width: 900px) {
+      .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+      .panel-layers { grid-template-columns: 1fr; }
+      .panel-layers .layer + .layer { border-left: none; border-top: 1px solid var(--border-subtle); padding-left: 0; padding-top: var(--space-md); }
+    }
+    @media (max-width: 600px) { .benefit-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+  <div id="header-placeholder"></div>
+
+  <main id="main-content">
+
+    <section class="section-dark pilar-hero" aria-labelledby="pilar-title">
+      <div class="container">
+        <span class="pilar-badge">Pilar Ocupacional</span>
+        <h1 id="pilar-title">Benefícios que criam as condições certas para você trabalhar bem.</h1>
+        <p class="pilar-desc">Organização do trabalho e espaço físico importam, especialmente no remoto. Um ambiente funcional e ergonômico reduz estresse, preserva energia mental e melhora a concentração.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container section">
+        <div class="section-label">2 benefícios</div>
+        <h2>Escolha um benefício para ver os detalhes</h2>
+        <div class="benefit-grid" id="benefit-grid" role="list"></div>
+        <div class="pilar-footer-nav" style="margin-top:var(--space-xl)">
+          <a href="../index.html">← Voltar para a Home</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script>const BASE = '../';</script>
+  <script src="../js/components.js"></script>
+  <script>
+  (function() {
+
+    const BENEFITS = [
+      {
+        key: 'mobiliario',
+        icon: 'mobiliario',
+        title: 'Auxílio Mobiliário e Conforto',
+        desc: 'Reembolso de até R$ 2.300 para montar seu home office',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>Reembolso para aquisição de móveis, itens de ergonomia e periféricos de TI, conforme a necessidade e sob demanda, até atingir o limite disponível. O valor varia conforme a data de admissão:</p>
+              <p style="margin-top:0.75rem"><strong>A partir de 23/03/2026:</strong> até R$ 2.300 para a montagem completa do home office, incluindo mobiliário e periféricos (monitor, mouse, teclado, headset etc.).</p>
+              <p style="margin-top:0.5rem"><strong>Antes de 23/03/2026:</strong> saldo remanescente de até R$ 1.500 para mobiliário e ergonomia, mais R$ 500 adicionais para manutenção ou substituição de periféricos de TI (sujeito a avaliação do IT Ops, elegível após 12 meses de empresa). Os periféricos recebidos fisicamente da Pipefy ficam com você em caso de desligamento.</p>
+              <p style="margin-top:0.75rem;font-size:0.85rem;color:var(--text-secondary)">Exclusivo para modelos remoto e híbrido. Itens elegíveis: mesa, cadeira, suportes ergonômicos, mousepad, luminária, climatizador, repetidor Wi-Fi, nobreak, filtro de linha, monitor, mouse, teclado, headset, webcam e filtro de privacidade.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>Conforto físico reduz dor crônica, preserva energia mental e melhora a concentração. A Pipefy investe no seu espaço porque um bom ambiente de trabalho é parte da saúde ocupacional.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol>
+              <li>Para setup inicial ou saldo remanescente: acesse o <a href="https://app.pipefy.com/public/form/7Up3CYPW?utm_source=pipefy-ai" target="_blank" rel="noopener">Pipe Reimbursement Request</a>.</li>
+              <li>Para manutenção de periféricos (R$ 500): acesse o <a href="https://app.pipefy.com/pipes/305535068" target="_blank" rel="noopener">Pipe IT Operations</a>. O time de IT Ops avaliará a necessidade antes da aprovação.</li>
+              <li>Solicite o reembolso em até 30 dias da data da nota fiscal, com NF emitida em seu CPF. Recibos simples não são aceitos.</li>
+              <li>O reembolso aprovado é creditado no Saldo Caju, quinzenalmente (dia 15 ou 30 do mês).</li>
+            </ol>`
+          }
+        ],
+        faq: [
+          { q: 'O notebook está incluído?', a: `<p>Não. O notebook é um ativo da empresa, fornecido separadamente pelo time de TI.</p>` },
+          { q: 'Posso comprar qualquer item?', a: `<p>O foco é em itens que promovam ergonomia e saúde ocupacional conforme a NR-17. A lista completa de itens elegíveis está na seção "O que é".</p>` },
+          { q: 'E se eu for desligado e readmitido?', a: `<p>Readmissão após 2 anos: direito ao valor integral vigente (R$ 2.300). Readmissão em menos de 2 anos: direito a 50% do valor vigente (R$ 1.150).</p>` }
+        ]
+      },
+      {
+        key: 'coworking',
+        icon: 'coworking',
+        title: 'Coworking',
+        partner: 'via Woba',
+        desc: 'Espaços de trabalho fora de casa quando você precisar',
+        layers: [
+          {
+            label: 'O que é',
+            html: `<p>Acesso a uma rede de espaços de coworking via <strong>Woba</strong> para situações em que a infraestrutura residencial não seja suficiente: problemas de conexão, barulho, falta de foco ou reuniões estratégicas. As regras de elegibilidade, limites de uso e cobertura geográfica estão detalhadas na Política de Workplace Experience.</p>`
+          },
+          {
+            label: 'Por que importa',
+            html: `<p>O modelo remoto oferece liberdade, mas há dias em que trabalhar de casa não é o ideal. Ter acesso a um espaço profissional pontualmente reduz o isolamento e garante as condições necessárias para entregar bem.</p>`
+          },
+          {
+            label: 'Como usar',
+            html: `<ol>
+              <li>Acesse o portal de Workplace Experience.</li>
+              <li>Abra uma solicitação informando data, localidade e necessidade.</li>
+              <li>Aguarde a aprovação e as instruções de check-in do time de Workplace.</li>
+            </ol>
+            <p style="font-size:0.85rem;color:var(--text-secondary);margin-top:0.75rem">Consulte a Política de Workplace Experience para detalhes sobre elegibilidade e limites de uso.</p>`
+          }
+        ]
+      }
+    ];
+
+    const ICONS = {
+      'mobiliario': '<path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M6 17v2M18 17v2"/><path d="M8 7V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/>',
+      'coworking': '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h2v3H7zM11 8h2v5h-2zM15 8h2v2h-2"/>',
+    };
+
+    const grid = document.getElementById('benefit-grid');
+    let activeKey = null, activePanel = null;
+
+    function renderCard(b) {
+      const card = document.createElement('div');
+      card.className = 'benefit-grid-card';
+      card.setAttribute('role', 'listitem');
+      card.setAttribute('tabindex', '0');
+      card.dataset.key = b.key;
+      card.innerHTML = `
+        <div class="grid-card-top">
+          <div class="grid-card-icon"><svg viewBox="0 0 24 24">${ICONS[b.icon] || ''}</svg></div>
+          <span class="grid-card-arrow">›</span>
+        </div>
+        <div class="grid-card-title">${b.title}</div>
+        <div class="grid-card-desc">${b.desc}</div>
+        ${b.partner ? `<div class="grid-card-partner">${b.partner}</div>` : ''}
+      `;
+      card.addEventListener('click', () => togglePanel(b.key, card));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePanel(b.key, card); } });
+      return card;
+    }
+
+    function renderPanelContent(b) {
+      const layersHtml = b.layers.map((l) => {
+        const linksHtml = l.links ? `<div class="panel-links">${l.links.map(lk => `<a href="${lk.url}" class="action-link" target="_blank" rel="noopener">${lk.label}</a>`).join('')}</div>` : '';
+        return `<div class="layer"><span class="layer-label">${l.label}</span>${l.html}${linksHtml}</div>`;
+      }).join('');
+
+      let faqHtml = '';
+      if (b.faq && b.faq.length) {
+        faqHtml = `<div class="faq-section"><div class="faq-section-label">Perguntas frequentes</div><div class="faq-list">${b.faq.map(f => `
+          <div class="faq-item">
+            <button class="faq-btn" aria-expanded="false">${f.q} <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="faq-panel" role="region"><div class="faq-panel-inner">${f.a}</div></div>
+          </div>`).join('')}</div></div>`;
+      }
+
+      return `<div class="panel-body">
+        <div class="panel-header">
+          <div class="panel-title-row">
+            <h2>${b.title}</h2>
+            ${b.partner ? `<span class="benefit-partner">${b.partner}</span>` : ''}
+          </div>
+          <button class="panel-close" aria-label="Fechar painel">✕</button>
+        </div>
+        <div class="panel-layers">${layersHtml}</div>
+        ${faqHtml}
+      </div>`;
+    }
+
+    function getLastCardInRow(clickedCard) {
+      const cards = [...grid.querySelectorAll('.benefit-grid-card')];
+      const top = clickedCard.getBoundingClientRect().top;
+      let last = clickedCard;
+      cards.forEach(c => {
+        if (Math.abs(c.getBoundingClientRect().top - top) < 5 && c.getBoundingClientRect().left >= last.getBoundingClientRect().left) last = c;
+      });
+      return last;
+    }
+
+    function closePanel() {
+      if (!activePanel) return;
+      activePanel.classList.remove('open');
+      const prev = activePanel;
+      setTimeout(() => { if (prev.parentNode) prev.remove(); }, 400);
+      activePanel = null;
+      grid.querySelectorAll('.benefit-grid-card.active').forEach(c => c.classList.remove('active'));
+      activeKey = null;
+    }
+
+    function togglePanel(key, clickedCard) {
+      if (activeKey === key) { closePanel(); return; }
+      closePanel();
+      activeKey = key;
+      const b = BENEFITS.find(x => x.key === key);
+      const panel = document.createElement('div');
+      panel.className = 'benefit-detail-panel';
+      panel.innerHTML = `<div class="panel-inner">${renderPanelContent(b)}</div>`;
+      getLastCardInRow(clickedCard).insertAdjacentElement('afterend', panel);
+      activePanel = panel;
+      clickedCard.classList.add('active');
+      panel.querySelector('.panel-close').addEventListener('click', closePanel);
+      requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.add('open')));
+      setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+      panel.querySelectorAll('.faq-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.faq-item');
+          const fp = item.querySelector('.faq-panel');
+          const isOpen = item.classList.contains('open');
+          panel.querySelectorAll('.faq-item.open').forEach(o => {
+            o.classList.remove('open');
+            o.querySelector('.faq-panel').style.maxHeight = null;
+            o.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            item.classList.add('open');
+            fp.style.maxHeight = fp.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    }
+
+    BENEFITS.forEach(b => grid.appendChild(renderCard(b)));
+
+  })();
+  </script>
+</body>
+</html>
