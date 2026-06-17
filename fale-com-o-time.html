@@ -5,29 +5,194 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Fale com o Time — Benefits Hub Pipefy">
   <title>Fale com o Time — Benefits Hub Pipefy</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-top: var(--space-xl);
+    }
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .contact-card:hover {
+      border-color: var(--color-primary);
+      box-shadow: 0 6px 20px rgba(16,26,73,0.07);
+    }
+    .contact-card-header { display: flex; align-items: center; gap: 1rem; }
+    .contact-avatar {
+      width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, #005EFC, #7215D8);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-heading); font-weight: 700; font-size: 1rem; color: #fff;
+    }
+    .contact-avatar.pipo { background: linear-gradient(135deg, #7215D8, #E13C7D); }
+    .contact-name { font-family: var(--font-heading); font-weight: 700; font-size: 1.05rem; color: var(--text-primary); }
+
+    .contact-when {
+      background: var(--bg-card-hover);
+      border-radius: var(--radius-sm);
+      padding: 0.875rem 1rem;
+      flex: 1;
+    }
+    .contact-when-label {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--text-secondary); margin-bottom: 0.5rem;
+    }
+    .contact-when ul { margin: 0; padding-left: 1.1rem; }
+    .contact-when ul li { font-size: 0.85rem; color: var(--text-primary); line-height: 1.6; }
+
+    .contact-actions { margin-top: auto; }
+    .btn-contact {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--color-primary); color: #fff;
+      padding: 0.6rem 1.25rem; border-radius: 6px;
+      font-size: 0.85rem; font-weight: 600; text-decoration: none;
+      transition: opacity .2s;
+    }
+    .btn-contact:hover { opacity: .85; }
+    .btn-contact-secondary {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--bg-card-hover); color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      padding: 0.6rem 1.25rem; border-radius: 6px;
+      font-size: 0.85rem; font-weight: 600; text-decoration: none;
+      transition: border-color .2s;
+      margin-left: 0.5rem;
+    }
+    .btn-contact-secondary:hover { border-color: var(--color-primary); }
+
+    .hint-box {
+      background: #EEF4FF; border-left: 4px solid #005EFC;
+      border-radius: 6px; padding: 1rem 1.25rem;
+      font-size: 0.85rem; color: #1A2B6B; line-height: 1.5;
+      margin-top: var(--space-xl);
+    }
+    .hint-box strong { color: #005EFC; }
+
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+  </style>
 </head>
 <body>
-
   <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
-
   <div id="header-placeholder"></div>
 
   <main id="main-content">
-    <div class="page-placeholder">
-      <span class="badge">Em construção</span>
-      <h1>Fale com o Time</h1>
-      <p>Aqui você vai encontrar quem somos, como nos acionar no Slack e o SLA de resposta.</p>
+
+    <section class="section-dark pilar-hero" aria-labelledby="fale-title">
+      <div class="container">
+        <span class="pilar-badge">Fale com o Time</span>
+        <h1 id="fale-title">A pessoa certa para cada dúvida.</h1>
+        <p class="pilar-desc">O time de People e Payroll está aqui para ajudar. Encontre abaixo quem pode responder melhor à sua situação.</p>
+      </div>
+    </section>
+
+    <div class="container section">
+
+      <div class="contact-grid">
+
+        <!-- HELLEN -->
+        <div class="contact-card">
+          <div class="contact-card-header">
+            <div class="contact-avatar">HA</div>
+            <div class="contact-name">Fale com a Hellen</div>
+          </div>
+          <div class="contact-when">
+            <div class="contact-when-label">Quando entrar em contato</div>
+            <ul>
+              <li>Dúvidas sobre a política ou elegibilidade de um benefício</li>
+              <li>Quer entender melhor como o programa funciona</li>
+              <li>Não sabe a quem direcionar — ela ajuda a encontrar a pessoa certa</li>
+            </ul>
+          </div>
+          <div class="contact-actions">
+            <a class="btn-contact" href="https://pipefy.slack.com/team/U0780G69PUN" target="_blank" rel="noopener">Entrar em contato</a>
+          </div>
+        </div>
+
+        <!-- VITÓRIA -->
+        <div class="contact-card">
+          <div class="contact-card-header">
+            <div class="contact-avatar">VC</div>
+            <div class="contact-name">Fale com a Vitória</div>
+          </div>
+          <div class="contact-when">
+            <div class="contact-when-label">Quando entrar em contato</div>
+            <ul>
+              <li>Plano de saúde, odontológico ou Wellhub ainda não foi ativado</li>
+              <li>Dúvidas sobre cadastro e operacionalização de benefícios</li>
+              <li>Algum benefício solicitado ainda não apareceu</li>
+            </ul>
+          </div>
+          <div class="contact-actions">
+            <a class="btn-contact" href="https://pipefy.slack.com/messages/D09V6A2U1RV" target="_blank" rel="noopener">Entrar em contato</a>
+          </div>
+        </div>
+
+        <!-- JOYCE -->
+        <div class="contact-card">
+          <div class="contact-card-header">
+            <div class="contact-avatar">JO</div>
+            <div class="contact-name">Fale com a Joyce</div>
+          </div>
+          <div class="contact-when">
+            <div class="contact-when-label">Quando entrar em contato</div>
+            <ul>
+              <li>Dúvidas sobre benefícios relacionados à folha de pagamento</li>
+              <li>Acompanhamento de cards abertos no Payroll</li>
+              <li>Questões sobre licenças e seus reflexos em pagamento</li>
+            </ul>
+          </div>
+          <div class="contact-actions">
+            <a class="btn-contact" href="https://pipefy.slack.com/messages/D078HGSJ1S6" target="_blank" rel="noopener">Entrar em contato</a>
+          </div>
+        </div>
+
+        <!-- PIPO -->
+        <div class="contact-card">
+          <div class="contact-card-header">
+            <div class="contact-avatar pipo">PS</div>
+            <div class="contact-name">Fale com a Pipo Saúde</div>
+          </div>
+          <div class="contact-when">
+            <div class="contact-when-label">Quando entrar em contato</div>
+            <ul>
+              <li>Dúvidas sobre a rede credenciada do plano de saúde</li>
+              <li>Orientação clínica, encaminhamento ou renovação de receita</li>
+              <li>Problemas com o aplicativo ou Programa Pinguim</li>
+            </ul>
+          </div>
+          <div class="contact-actions">
+            <a class="btn-contact" href="https://wa.me/5511942021122" target="_blank" rel="noopener">Entrar em contato</a>
+            <a class="btn-contact-secondary" href="https://membro.piposaude.com.br" target="_blank" rel="noopener">Acessar portal</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="hint-box">
+        <strong>Lembre-se:</strong> para solicitações formais de benefícios (incluir dependente, solicitar licença, renovar documentos), use o <a href="https://app.pipefy.com/organizations/28/interfaces/328df11f-2476-4de1-8bd9-bf581507f072/pages/674504c4-b009-4bd4-9773-a62fe9efbc1a" target="_blank" rel="noopener" style="color:#005EFC;font-weight:600">portal Payroll Support</a> — é por lá que os pedidos são registrados e processados.
+      </div>
+
+      <div style="margin-top:var(--space-xl)">
+        <a href="index.html" style="color:var(--text-secondary);font-size:.85rem;text-decoration:none">← Voltar para a Home</a>
+      </div>
+
     </div>
   </main>
 
   <div id="footer-placeholder"></div>
-
   <script>const BASE = './';</script>
   <script src="js/components.js"></script>
 </body>
