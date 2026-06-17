@@ -45,7 +45,7 @@
     .platform-card:hover .platform-cta { opacity: .85; }
 
     /* Canais internos */
-    .internal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .internal-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
     .internal-card {
       border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
       padding: 1.5rem; background: var(--bg-card);
@@ -65,7 +65,7 @@
     .internal-card a:hover { text-decoration: underline; }
 
     @media (max-width: 1024px) { .platform-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 768px) { .platform-grid { grid-template-columns: repeat(2, 1fr); } .internal-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .platform-grid { grid-template-columns: repeat(2, 1fr); } .internal-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 480px) { .platform-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -117,6 +117,15 @@
             <a href="https://drive.google.com/file/d/1Kc6mnJ9C0quz7SXYCIelL45xeO8h7eSX/view?usp=sharing" target="_blank" rel="noopener">Ver documento →</a>
           </div>
 
+          <div class="internal-card">
+            <div class="internal-card-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg>
+            </div>
+            <h3>Apdata</h3>
+            <p>Portal de RH. Acesse contracheque, holerites, informe de rendimentos e solicitações de abono.</p>
+            <a href="https://cliente.apdata.com.br/pipefy/index.html" target="_blank" rel="noopener">Acessar portal →</a>
+          </div>
+
         </div>
       </div>
 
@@ -125,7 +134,7 @@
         <div class="links-category-title">Saúde e bem-estar</div>
         <div class="platform-grid">
 
-          <a class="platform-card" href="https://app.keiken.com.br" target="_blank" rel="noopener">
+          <a class="platform-card" href="https://www.keiken.app/" target="_blank" rel="noopener">
             <div class="platform-info">
               <div class="platform-tag">Apoio psicológico</div>
               <div class="platform-name">Keiken</div>
@@ -143,7 +152,7 @@
             <span class="platform-cta">Acessar</span>
           </a>
 
-          <a class="platform-card" href="https://app.wellhub.com" target="_blank" rel="noopener">
+          <a class="platform-card" href="https://wellhub.com/pt-br/" target="_blank" rel="noopener">
             <div class="platform-info">
               <div class="platform-tag">Atividade física</div>
               <div class="platform-name">Wellhub</div>
@@ -169,15 +178,6 @@
         <div class="links-category-title">Financeiro</div>
         <div class="platform-grid">
 
-          <a class="platform-card" href="https://app.cajubenefits.com.br" target="_blank" rel="noopener">
-            <div class="platform-info">
-              <div class="platform-tag">Cartão multibenefícios</div>
-              <div class="platform-name">Caju</div>
-              <div class="platform-desc">Gerencie saldo de alimentação, educação, mobilidade, saúde e cultura.</div>
-            </div>
-            <span class="platform-cta">Acessar</span>
-          </a>
-
           <a class="platform-card" href="https://www.creditas.com/programa-educacao-financeira?utm_source=farming&utm_medium=rh&utm_campaign=f-edufin" target="_blank" rel="noopener">
             <div class="platform-info">
               <div class="platform-tag">Educação financeira</div>
@@ -187,14 +187,6 @@
             <span class="platform-cta">Acessar</span>
           </a>
 
-          <a class="platform-card" href="https://cliente.apdata.com.br/pipefy/index.html" target="_blank" rel="noopener">
-            <div class="platform-info">
-              <div class="platform-tag">Portal de RH</div>
-              <div class="platform-name">Apdata</div>
-              <div class="platform-desc">Contracheque, holerites, informe de rendimentos e solicitações de abono.</div>
-            </div>
-            <span class="platform-cta">Acessar portal</span>
-          </a>
 
         </div>
       </div>
