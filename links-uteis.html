@@ -5,29 +5,277 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Links Úteis — Benefits Hub Pipefy">
   <title>Links Úteis — Benefits Hub Pipefy</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .links-category { margin-top: var(--space-xl); }
+    .links-category-title {
+      font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700;
+      color: var(--text-primary); margin-bottom: var(--space-md);
+      padding-bottom: 0.5rem; border-bottom: 2px solid var(--border-subtle);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .links-category-title::before {
+      content: ''; width: 4px; height: 18px;
+      background: var(--color-primary); border-radius: 2px;
+    }
+
+    .platform-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+
+    .platform-card {
+      border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
+      overflow: hidden; display: flex; flex-direction: column;
+      transition: transform var(--transition), box-shadow var(--transition);
+      text-decoration: none;
+    }
+    .platform-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(16,26,73,0.1); border-color: var(--color-primary); }
+
+    .platform-logo {
+      height: 80px; display: flex; align-items: center; justify-content: center;
+      padding: 1rem; background: var(--bg-card);
+    }
+    .platform-logo.dark { background: #111; }
+    .platform-logo img { max-width: 100%; max-height: 44px; object-fit: contain; }
+
+    .platform-info { padding: 0.875rem 1rem; background: var(--bg-card); flex: 1; display: flex; flex-direction: column; gap: 0.3rem; }
+    .platform-name { font-family: var(--font-heading); font-weight: 700; font-size: 0.9rem; color: var(--text-primary); }
+    .platform-desc { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.4; flex: 1; }
+    .platform-cta {
+      display: block; text-align: center; padding: 0.5rem;
+      background: var(--color-primary); color: #fff;
+      font-size: 0.78rem; font-weight: 600; text-decoration: none;
+      transition: opacity .2s;
+    }
+    .platform-card:hover .platform-cta { opacity: .85; }
+
+    /* Internal resources */
+    .internal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .internal-card {
+      border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
+      padding: 1.5rem; background: var(--bg-card);
+      display: flex; flex-direction: column; gap: 0.75rem;
+      transition: border-color var(--transition);
+    }
+    .internal-card:hover { border-color: var(--color-primary); }
+    .internal-card-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: linear-gradient(135deg, #005EFC, #7215D8);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .internal-card-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+    .internal-card h3 { font-family: var(--font-heading); font-weight: 700; font-size: 0.95rem; color: var(--text-primary); }
+    .internal-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; flex: 1; }
+    .internal-card a {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-size: 0.82rem; font-weight: 600; color: var(--color-primary);
+      text-decoration: none;
+    }
+    .internal-card a:hover { text-decoration: underline; }
+
+    @media (max-width: 1024px) { .platform-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px) {
+      .platform-grid { grid-template-columns: repeat(2, 1fr); }
+      .internal-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) { .platform-grid { grid-template-columns: 1fr; } }
+  </style>
 </head>
 <body>
-
   <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
-
   <div id="header-placeholder"></div>
 
   <main id="main-content">
-    <div class="page-placeholder">
-      <span class="badge">Em construção</span>
-      <h1>Links Úteis</h1>
-      <p>Acesso rápido a todas as plataformas parceiras: Payroll, Apdata, Keiken, Wellhub, Pipo Saúde e Caju.</p>
+
+    <section class="section-dark pilar-hero" aria-labelledby="links-title">
+      <div class="container">
+        <span class="pilar-badge">Links Úteis</span>
+        <h1 id="links-title">Tudo em um só lugar.</h1>
+        <p class="pilar-desc">Acesso direto às plataformas parceiras, canais internos e documentos do programa de benefícios Pipefy.</p>
+      </div>
+    </section>
+
+    <main id="main-content">
+    <div class="container section">
+
+      <!-- CANAIS INTERNOS -->
+      <div class="links-category">
+        <div class="links-category-title">Canais internos</div>
+        <div class="internal-grid">
+
+          <div class="internal-card">
+            <div class="internal-card-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3>#pfybenefits</h3>
+            <p>Canal oficial de benefícios no Slack. Comunicados mensais, novidades do programa e canvas com documentos de acesso rápido.</p>
+            <a href="https://pipefy.slack.com/archives/C05MA32E96F" target="_blank" rel="noopener">Abrir no Slack →</a>
+          </div>
+
+          <div class="internal-card">
+            <div class="internal-card-icon">
+              <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <h3>Payroll Support</h3>
+            <p>Portal de solicitações de benefícios: inclusão de dependentes, reembolsos, licenças e demais pedidos ao time de Payroll.</p>
+            <a href="https://app.pipefy.com/organizations/28/interfaces/328df11f-2476-4de1-8bd9-bf581507f072/pages/674504c4-b009-4bd4-9773-a62fe9efbc1a" target="_blank" rel="noopener">Acessar portal →</a>
+          </div>
+
+          <div class="internal-card">
+            <div class="internal-card-icon">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <h3>Política de Benefícios</h3>
+            <p>Documento oficial com todas as regras, critérios de elegibilidade e diretrizes do programa de benefícios da Pipefy BRA.</p>
+            <a href="https://drive.google.com/file/d/1Kc6mnJ9C0quz7SXYCIelL45xeO8h7eSX/view?usp=sharing" target="_blank" rel="noopener">Ver documento →</a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SAÚDE E BEM-ESTAR -->
+      <div class="links-category">
+        <div class="links-category-title">Saúde e bem-estar</div>
+        <div class="platform-grid">
+
+          <a class="platform-card" href="https://youtu.be/qLJrv15ijZc?feature=shared" target="_blank" rel="noopener">
+            <div class="platform-logo">
+              <img src="assets/logos/keiken.png" alt="Keiken">
+            </div>
+            <div class="platform-info">
+              <div class="platform-name">Keiken</div>
+              <div class="platform-desc">Plataforma de apoio psicológico. Agende sessões na rede credenciada ou peça reembolso.</div>
+            </div>
+            <span class="platform-cta">Criar conta</span>
+          </a>
+
+          <a class="platform-card" href="https://membro.piposaude.com.br" target="_blank" rel="noopener">
+            <div class="platform-logo dark">
+              <img src="assets/logos/pipo.png" alt="Pipo Saúde">
+            </div>
+            <div class="platform-info">
+              <div class="platform-name">Pipo Saúde</div>
+              <div class="platform-desc">Concierge de saúde. Teleconsultas, encaminhamentos, renovação de receitas e Programa Pinguim.</div>
+            </div>
+            <span class="platform-cta">Acessar</span>
+          </a>
+
+          <a class="platform-card" href="https://wellhubapp.com" target="_blank" rel="noopener">
+            <div class="platform-logo dark">
+              <img src="assets/logos/wellhub.png" alt="Wellhub">
+            </div>
+            <div class="platform-info">
+              <div class="platform-name">Wellhub</div>
+              <div class="platform-desc">Academias, estúdios e apps de bem-estar. Planos Starter e Basic gratuitos.</div>
+            </div>
+            <span class="platform-cta">Acessar app</span>
+          </a>
+
+          <a class="platform-card" href="https://form.typeform.com/to/MWgYK1CU" target="_blank" rel="noopener">
+            <div class="platform-logo">
+              <img src="assets/logos/meu-pet-club.png" alt="Meu Pet Club">
+            </div>
+            <div class="platform-info">
+              <div class="platform-name">Meu Pet Club</div>
+              <div class="platform-desc">Plano de saúde veterinária para cães e gatos. Adesão opcional, desconto em folha.</div>
+            </div>
+            <span class="platform-cta">Formulário de adesão</span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- FINANCEIRO -->
+      <div class="links-category">
+        <div class="links-category-title">Financeiro</div>
+        <div class="platform-grid">
+
+          <a class="platform-card" href="https://app.cajubenefits.com.br" target="_blank" rel="noopener">
+            <div class="platform-logo dark">
+              <img src="assets/logos/caju.png" alt="Caju">
+            </div>
+            <div class="platform-info">
+              <div class="platform-name">Caju</div>
+              <div class="platform-desc">Cartão multibenefícios. Alimentação, educação, mobilidade, saúde e cultura em um só app.</div>
+            </div>
+            <span class="platform-cta">Acessar app</span>
+          </a>
+
+          <a class="platform-card" href="https://www.creditas.com/programa-educacao-financeira?utm_source=farming&utm_medium=rh&utm_campaign=f-edufin" target="_blank" rel="noopener">
+            <div class="platform-logo dark">
+              <img src="assets/logos/creditas.png" alt="Creditas">
+            </div>
+            <div class="platform-info">
+              <div class="platform-name">Creditas</div>
+              <div class="platform-desc">Antecipação salarial e programa de educação financeira exclusivo para colaboradores Pipefy.</div>
+            </div>
+            <span class="platform-cta">Educação financeira</span>
+          </a>
+
+          <a class="platform-card" href="https://cliente.apdata.com.br/pipefy/index.html" target="_blank" rel="noopener">
+            <div class="platform-logo">
+              <img src="assets/logos/apdata.png" alt="Apdata">
+            </div>
+            <div class="platform-info">
+              <div class="platform-name">Apdata</div>
+              <div class="platform-desc">Portal de RH. Acesse contracheque, holerites, informe de rendimentos e solicitações de abono.</div>
+            </div>
+            <span class="platform-cta">Acessar portal</span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- TRABALHO E LAZER -->
+      <div class="links-category">
+        <div class="links-category-title">Trabalho e lazer</div>
+        <div class="platform-grid">
+
+          <a class="platform-card" href="https://app.pipefy.com/public/form/iW8MbKGw" target="_blank" rel="noopener">
+            <div class="platform-logo dark">
+              <img src="assets/logos/udemy.png" alt="Udemy Business">
+            </div>
+            <div class="platform-info">
+              <div class="platform-name">Udemy Business</div>
+              <div class="platform-desc">Solicite sua licença corporativa para acesso ilimitado a cursos de soft e hard skills.</div>
+            </div>
+            <span class="platform-cta">Solicitar licença</span>
+          </a>
+
+          <a class="platform-card" href="https://app.pipefy.com/organizations/28/interfaces/e94f94de-bcbf-4ce8-9828-1e408a787ae2/pages/6b73af75-25a7-46d5-897a-4ba22c251a88" target="_blank" rel="noopener">
+            <div class="platform-logo dark">
+              <img src="assets/logos/woba.png" alt="Woba">
+            </div>
+            <div class="platform-info">
+              <div class="platform-name">Woba</div>
+              <div class="platform-desc">Espaços de coworking quando o home office não é o ideal. Solicite via Workplace Experience.</div>
+            </div>
+            <span class="platform-cta">Portal Workplace</span>
+          </a>
+
+          <a class="platform-card" href="https://app.onhappy.com.br/start" target="_blank" rel="noopener">
+            <div class="platform-logo dark">
+              <img src="assets/logos/onhappy.png" alt="OnHappy">
+            </div>
+            <div class="platform-info">
+              <div class="platform-name">OnHappy</div>
+              <div class="platform-desc">Passagens e hospedagens com tarifas corporativas. Voucher de R$ 100 na primeira compra.</div>
+            </div>
+            <span class="platform-cta">Acessar plataforma</span>
+          </a>
+
+        </div>
+      </div>
+
+      <div style="margin-top:var(--space-xl)">
+        <a href="index.html" style="color:var(--text-secondary);font-size:.85rem;text-decoration:none">← Voltar para a Home</a>
+      </div>
+
     </div>
   </main>
 
   <div id="footer-placeholder"></div>
-
   <script>const BASE = './';</script>
   <script src="js/components.js"></script>
 </body>
