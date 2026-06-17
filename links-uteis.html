@@ -27,25 +27,19 @@
     .platform-card {
       border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
       overflow: hidden; display: flex; flex-direction: column;
+      background: var(--bg-card); text-decoration: none;
       transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-      text-decoration: none; background: var(--bg-card);
     }
     .platform-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(16,26,73,0.1); border-color: var(--color-primary); }
 
-    .platform-logo {
-      height: 88px; display: flex; align-items: center; justify-content: center;
-      padding: 1rem 1.5rem; background: #fff;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .platform-logo img { max-width: 100%; max-height: 48px; object-fit: contain; }
-
-    .platform-info { padding: 0.875rem 1rem; flex: 1; display: flex; flex-direction: column; gap: 0.3rem; }
-    .platform-name { font-family: var(--font-heading); font-weight: 700; font-size: 0.9rem; color: var(--text-primary); }
-    .platform-desc { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.4; flex: 1; }
+    .platform-info { padding: 1.25rem 1rem; flex: 1; display: flex; flex-direction: column; gap: 0.4rem; }
+    .platform-name { font-family: var(--font-heading); font-weight: 700; font-size: 0.95rem; color: var(--text-primary); }
+    .platform-tag { font-size: 0.7rem; font-weight: 600; color: var(--color-primary); text-transform: uppercase; letter-spacing: .04em; }
+    .platform-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.45; flex: 1; margin-top: 0.1rem; }
     .platform-cta {
-      display: block; text-align: center; padding: 0.6rem;
+      display: block; text-align: center; padding: 0.65rem;
       background: var(--color-primary); color: #fff;
-      font-size: 0.78rem; font-weight: 600;
+      font-size: 0.8rem; font-weight: 600;
       transition: opacity .2s;
     }
     .platform-card:hover .platform-cta { opacity: .85; }
@@ -110,7 +104,7 @@
               <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
             </div>
             <h3>Payroll Support</h3>
-            <p>Portal de solicitações: inclusão de dependentes, licenças e demais pedidos ao time de Payroll.</p>
+            <p>Portal de solicitações: inclusão de dependentes, licenças, plano de saúde e demais pedidos ao time de Payroll.</p>
             <a href="https://app.pipefy.com/organizations/28/interfaces/328df11f-2476-4de1-8bd9-bf581507f072/pages/674504c4-b009-4bd4-9773-a62fe9efbc1a" target="_blank" rel="noopener">Acessar portal →</a>
           </div>
 
@@ -132,32 +126,26 @@
         <div class="platform-grid">
 
           <a class="platform-card" href="https://app.keiken.com.br" target="_blank" rel="noopener">
-            <div class="platform-logo">
-              <img src="assets/logos/keiken.png" alt="Keiken">
-            </div>
             <div class="platform-info">
+              <div class="platform-tag">Apoio psicológico</div>
               <div class="platform-name">Keiken</div>
-              <div class="platform-desc">Apoio psicológico. Agende sessões na rede credenciada ou peça reembolso.</div>
+              <div class="platform-desc">Agende sessões de terapia na rede credenciada ou solicite reembolso de profissional externo.</div>
             </div>
             <span class="platform-cta">Acessar</span>
           </a>
 
           <a class="platform-card" href="https://membro.piposaude.com.br" target="_blank" rel="noopener">
-            <div class="platform-logo">
-              <img src="assets/logos/pipo.png" alt="Pipo Saúde">
-            </div>
             <div class="platform-info">
+              <div class="platform-tag">Concierge de saúde</div>
               <div class="platform-name">Pipo Saúde</div>
-              <div class="platform-desc">Concierge de saúde. Teleconsultas, encaminhamentos e Programa Pinguim.</div>
+              <div class="platform-desc">Teleconsultas, encaminhamentos, renovação de receitas e Programa Pinguim.</div>
             </div>
             <span class="platform-cta">Acessar</span>
           </a>
 
           <a class="platform-card" href="https://app.wellhub.com" target="_blank" rel="noopener">
-            <div class="platform-logo">
-              <img src="assets/logos/wellhub.png" alt="Wellhub">
-            </div>
             <div class="platform-info">
+              <div class="platform-tag">Atividade física</div>
               <div class="platform-name">Wellhub</div>
               <div class="platform-desc">Academias, estúdios e apps de bem-estar. Planos Starter e Basic gratuitos.</div>
             </div>
@@ -165,10 +153,8 @@
           </a>
 
           <a class="platform-card" href="https://form.typeform.com/to/MWgYK1CU" target="_blank" rel="noopener">
-            <div class="platform-logo">
-              <img src="assets/logos/meu-pet-club.png" alt="Meu Pet Club">
-            </div>
             <div class="platform-info">
+              <div class="platform-tag">Assistência pet</div>
               <div class="platform-name">Meu Pet Club</div>
               <div class="platform-desc">Plano veterinário para cães e gatos. Adesão opcional, desconto em folha.</div>
             </div>
@@ -184,34 +170,28 @@
         <div class="platform-grid">
 
           <a class="platform-card" href="https://app.cajubenefits.com.br" target="_blank" rel="noopener">
-            <div class="platform-logo">
-              <img src="assets/logos/caju.png" alt="Caju">
-            </div>
             <div class="platform-info">
+              <div class="platform-tag">Cartão multibenefícios</div>
               <div class="platform-name">Caju</div>
-              <div class="platform-desc">Cartão multibenefícios. Alimentação, educação, mobilidade, saúde e cultura.</div>
+              <div class="platform-desc">Gerencie saldo de alimentação, educação, mobilidade, saúde e cultura.</div>
             </div>
             <span class="platform-cta">Acessar</span>
           </a>
 
           <a class="platform-card" href="https://www.creditas.com/programa-educacao-financeira?utm_source=farming&utm_medium=rh&utm_campaign=f-edufin" target="_blank" rel="noopener">
-            <div class="platform-logo">
-              <img src="assets/logos/creditas.png" alt="Creditas">
-            </div>
             <div class="platform-info">
+              <div class="platform-tag">Educação financeira</div>
               <div class="platform-name">Creditas</div>
-              <div class="platform-desc">Antecipação salarial e educação financeira para colaboradores Pipefy.</div>
+              <div class="platform-desc">Programa de educação financeira e antecipação salarial para colaboradores Pipefy.</div>
             </div>
-            <span class="platform-cta">Educação financeira</span>
+            <span class="platform-cta">Acessar</span>
           </a>
 
           <a class="platform-card" href="https://cliente.apdata.com.br/pipefy/index.html" target="_blank" rel="noopener">
-            <div class="platform-logo">
-              <img src="assets/logos/apdata.png" alt="Apdata">
-            </div>
             <div class="platform-info">
+              <div class="platform-tag">Portal de RH</div>
               <div class="platform-name">Apdata</div>
-              <div class="platform-desc">Portal de RH. Contracheque, holerites, informe de rendimentos e abonos.</div>
+              <div class="platform-desc">Contracheque, holerites, informe de rendimentos e solicitações de abono.</div>
             </div>
             <span class="platform-cta">Acessar portal</span>
           </a>
@@ -225,10 +205,8 @@
         <div class="platform-grid">
 
           <a class="platform-card" href="https://app.pipefy.com/public/form/iW8MbKGw" target="_blank" rel="noopener">
-            <div class="platform-logo">
-              <img src="assets/logos/udemy.png" alt="Udemy Business">
-            </div>
             <div class="platform-info">
+              <div class="platform-tag">Cursos</div>
               <div class="platform-name">Udemy Business</div>
               <div class="platform-desc">Solicite sua licença corporativa para acesso a cursos de soft e hard skills.</div>
             </div>
@@ -236,23 +214,19 @@
           </a>
 
           <a class="platform-card" href="https://app.pipefy.com/organizations/28/interfaces/e94f94de-bcbf-4ce8-9828-1e408a787ae2/pages/6b73af75-25a7-46d5-897a-4ba22c251a88" target="_blank" rel="noopener">
-            <div class="platform-logo">
-              <img src="assets/logos/woba.png" alt="Woba">
-            </div>
             <div class="platform-info">
+              <div class="platform-tag">Coworking</div>
               <div class="platform-name">Woba</div>
-              <div class="platform-desc">Coworking para quando o home office não é o ideal. Via Workplace Experience.</div>
+              <div class="platform-desc">Espaços de trabalho fora de casa. Solicite via portal de Workplace Experience.</div>
             </div>
             <span class="platform-cta">Portal Workplace</span>
           </a>
 
           <a class="platform-card" href="https://app.onhappy.com.br/start" target="_blank" rel="noopener">
-            <div class="platform-logo">
-              <img src="assets/logos/onhappy.png" alt="OnHappy">
-            </div>
             <div class="platform-info">
+              <div class="platform-tag">Viagens</div>
               <div class="platform-name">OnHappy</div>
-              <div class="platform-desc">Passagens e hospedagens com tarifas corporativas. R$ 100 de boas-vindas.</div>
+              <div class="platform-desc">Passagens e hospedagens com tarifas corporativas. R$ 100 de crédito na primeira compra.</div>
             </div>
             <span class="platform-cta">Acessar</span>
           </a>
