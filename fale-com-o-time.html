@@ -39,7 +39,16 @@
       overflow: hidden;
     }
     .contact-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .contact-avatar.pipo { background: linear-gradient(135deg, #7215D8, #E13C7D); }
+    /* Pipo: fundo branco para o logo aparecer */
+    .contact-avatar.pipo {
+      background: #fff;
+      border: 1px solid var(--border-subtle);
+      padding: 6px;
+    }
+    .contact-avatar.pipo img {
+      object-fit: contain;
+      mix-blend-mode: screen;
+    }
     .contact-name { font-family: var(--font-heading); font-weight: 700; font-size: 1.05rem; color: var(--text-primary); }
     .contact-team { font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.15rem; font-weight: 500; }
 
@@ -109,8 +118,10 @@
         <div class="contact-card">
           <div class="contact-card-header">
             <div class="contact-avatar"><img src="assets/fotos/hellen.jpg" alt="Hellen Albuquerque"></div>
-            <div class="contact-name">Fale com a Hellen</div>
+            <div>
+              <div class="contact-name">Fale com a Hellen</div>
               <div class="contact-team">Benefícios</div>
+            </div>
           </div>
           <div class="contact-when">
             <div class="contact-when-label">Quando entrar em contato</div>
@@ -129,8 +140,10 @@
         <div class="contact-card">
           <div class="contact-card-header">
             <div class="contact-avatar"><img src="assets/fotos/vitoria.jpg" alt="Vitória Carvalho"></div>
-            <div class="contact-name">Fale com a Vitória</div>
+            <div>
+              <div class="contact-name">Fale com a Vitória</div>
               <div class="contact-team">Payroll</div>
+            </div>
           </div>
           <div class="contact-when">
             <div class="contact-when-label">Quando entrar em contato</div>
@@ -149,8 +162,10 @@
         <div class="contact-card">
           <div class="contact-card-header">
             <div class="contact-avatar"><img src="assets/fotos/joyce.jpg" alt="Joyce Oliveira"></div>
-            <div class="contact-name">Fale com a Joyce</div>
+            <div>
+              <div class="contact-name">Fale com a Joyce</div>
               <div class="contact-team">Payroll</div>
+            </div>
           </div>
           <div class="contact-when">
             <div class="contact-when-label">Quando entrar em contato</div>
@@ -168,9 +183,13 @@
         <!-- PIPO -->
         <div class="contact-card">
           <div class="contact-card-header">
-            <div class="contact-avatar pipo">PS</div>
-            <div class="contact-name">Fale com a Pipo Saúde</div>
+            <div class="contact-avatar pipo">
+              <img src="assets/logos/pipo.png" alt="Pipo Saúde">
+            </div>
+            <div>
+              <div class="contact-name">Fale com a Pipo Saúde</div>
               <div class="contact-team">Corretora de saúde</div>
+            </div>
           </div>
           <div class="contact-when">
             <div class="contact-when-label">Quando entrar em contato</div>
