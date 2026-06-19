@@ -343,15 +343,15 @@ a.card-link p { color: var(--text-secondary); font-size: 0.9rem; }
   stroke: #ffffff; /* Lupa fica 100% branca no hover */
 }
 
-/* ================================================
-   REGION SWITCHER
-   ================================================ */
-
+/* REGION SWITCHER */
 .region-switcher {
   display: flex;
   align-items: center;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
+  /* Gradiente na borda usando background-clip */
+  background:
+    linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
+    var(--gradient) border-box;
+  border: 1px solid transparent;
   border-radius: 20px;
   padding: 3px;
   gap: 1px;
@@ -364,23 +364,23 @@ a.card-link p { color: var(--text-secondary); font-size: 0.9rem; }
   font-size: 0.72rem;
   font-weight: 700;
   color: rgba(255,255,255,0.5);
-  padding: 0.2rem 0.65rem;
+  padding: 0.22rem 0.7rem;
   border-radius: 14px;
   text-decoration: none;
   transition: color .2s, background .2s;
   line-height: 1.5;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   white-space: nowrap;
   background: transparent;
 }
 
 .site-nav .region-btn:hover:not(.region-btn--active) {
   color: rgba(255,255,255,0.85);
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.08);
 }
 
 .site-nav .region-btn--active {
-  background: rgba(255,255,255,0.18);
+  background: var(--gradient);
   color: #fff;
   cursor: default;
   pointer-events: none;
