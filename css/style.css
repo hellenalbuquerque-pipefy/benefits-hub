@@ -301,3 +301,51 @@ a.card-link p { color: var(--text-secondary); font-size: 0.9rem; }
 .pilar-footer-nav { margin-top: var(--space-xl); padding-top: var(--space-lg); border-top: 1px solid var(--border-subtle); }
 .pilar-footer-nav a { font-size: 0.875rem; font-weight: 600; color: var(--text-secondary); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: color var(--transition); }
 .pilar-footer-nav a:hover { color: var(--color-primary); }
+
+/* ================================================
+   REGION SWITCHER
+   ================================================ */
+
+.region-switcher {
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 3px;
+  gap: 1px;
+  flex-shrink: 0;
+  margin-left: 0.25rem;
+}
+
+/* Especificidade (0,2,0) — supera .site-nav a (0,1,1) */
+.site-nav .region-btn {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  padding: 0.2rem 0.65rem;
+  border-radius: 14px;
+  text-decoration: none;
+  transition: color .2s, background .2s;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  background: transparent;
+}
+
+.site-nav .region-btn:hover:not(.region-btn--active) {
+  color: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.1);
+}
+
+.site-nav .region-btn--active {
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  cursor: default;
+  pointer-events: none;
+}
+
+.site-nav .region-btn:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.6);
+  outline-offset: 2px;
+}
