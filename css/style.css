@@ -390,3 +390,25 @@ a.card-link p { color: var(--text-secondary); font-size: 0.9rem; }
   outline: 2px solid rgba(255,255,255,0.6);
   outline-offset: 2px;
 }
+
+.header-search          { display: flex; align-items: center; gap: 0.5rem; }
+.header-search-form     { display: flex; align-items: center; gap: 0.4rem; }
+.header-search-form[hidden] { display: none; }
+
+.header-search-input {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.25);
+  color: #fff;
+  border-radius: 6px;
+  padding: .35rem .75rem;
+  font-size: .85rem;
+  font-family: inherit;
+  width: 200px;
+  transition: background .2s, border-color .2s;
+}
+.header-search-input::placeholder { color: rgba(255,255,255,.5); }
+.header-search-input:focus {
+  outline: none;
+  background: rgba(255,255,255,.18);
+  border-color: rgba(255,255,255,.5);
+}
