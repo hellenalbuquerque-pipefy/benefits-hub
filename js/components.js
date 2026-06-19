@@ -28,7 +28,7 @@ function renderHeader() {
 
   const navLinks = us ? `
       <a href="${BASE}us/index.html">Home</a>
-      <a href="${BASE}us/parental-guide.html">Parental Guide</a>
+      <a href="${BASE}us/parenting-guide.html">Parenting Guide</a>
       <a href="${BASE}us/useful-links.html">Useful Links</a>
       <a href="${BASE}us/contact.html" class="nav-cta">Contact the Team</a>` : `
       <a href="${BASE}index.html">Home</a>
@@ -80,7 +80,7 @@ function renderFooter() {
 
   const footerLinks = us ? `
       <a href="${BASE}us/index.html">Home</a>
-      <a href="${BASE}us/parental-leave.html">Parental Leave</a>
+      <a href="${BASE}us/parenting-guide.html">Parenting Guide</a>
       <a href="${BASE}us/useful-links.html">Useful Links</a>
       <a href="${BASE}us/contact.html">Contact the Team</a>` : `
       <a href="${BASE}index.html">Home</a>
