@@ -55,11 +55,11 @@ function renderHeader() {
             <a href="${brHref}"
                class="region-btn${!us ? ' region-btn--active' : ''}"
                ${!us ? 'aria-current="true"' : ''}
-               aria-label="Brazil">🇧🇷 BR</a>
+               aria-label="Brazil">BR</a>
             <a href="${usHref}"
                class="region-btn${us ? ' region-btn--active' : ''}"
                ${us ? 'aria-current="true"' : ''}
-               aria-label="United States">🇺🇸 US</a>
+               aria-label="United States">US</a>
           </div>
           <div class="header-search">
             <button class="search-toggle" id="search-toggle" aria-label="${searchLabel}" aria-expanded="false">
