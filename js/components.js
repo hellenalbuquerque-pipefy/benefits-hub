@@ -105,7 +105,7 @@ function initSearch() {
 
   // Fechar clicando fora
   document.addEventListener('click', e => {
-    if (!form.hidden && !form.contains(e.target) && e.target !== toggle) {
+    if (!form.hidden && !form.contains(e.target) && !toggle.contains(e.target)) {
       form.hidden = true;
       toggle.setAttribute('aria-expanded', 'false');
     }
