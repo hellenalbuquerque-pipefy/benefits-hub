@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Busca — Benefits Hub Pipefy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .search-page { padding: var(--space-xl) 0; }
+    .search-bar-wrap { display: flex; gap: 0.5rem; margin-bottom: var(--space-xl); }
+    .search-input {
+      flex: 1; padding: 0.75rem 1rem; border: 2px solid var(--border-subtle);
+      border-radius: var(--radius-md); font-size: 1rem; font-family: var(--font-body);
+      background: var(--bg-card); color: var(--text-primary);
+      transition: border-color .2s;
+    }
+    .search-input:focus { outline: none; border-color: var(--color-primary); }
+    .search-btn {
+      padding: 0.75rem 1.5rem; background: var(--color-primary); color: #fff;
+      border: none; border-radius: var(--radius-md); font-weight: 600;
+      font-size: 0.9rem; cursor: pointer; transition: opacity .2s;
+    }
+    .search-btn:hover { opacity: .85; }
+
+    .results-meta { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: var(--space-lg); }
+    .results-meta strong { color: var(--text-primary); }
+
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .result-card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md); padding: 1.25rem;
+      text-decoration: none; display: flex; flex-direction: column; gap: 0.6rem;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .result-card:hover { border-color: var(--color-primary); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,26,73,.07); }
+    .result-pilar {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+    }
+    .result-pilar-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .result-title { font-family: var(--font-heading); font-weight: 700; font-size: 0.95rem; color: var(--text-primary); }
+    .result-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4; flex: 1; }
+    .result-arrow { font-size: 0.8rem; color: var(--color-primary); font-weight: 600; margin-top: auto; }
+
+    .no-results { text-align: center; padding: 3rem 0; }
+    .no-results-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .no-results h2 { font-size: 1.2rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+    .no-results p { color: var(--text-secondary); font-size: 0.9rem; }
+
+    .suggestions { margin-top: var(--space-xl); }
+    .suggestions-title { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem; }
+    .suggestion-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: 100px; padding: 0.35rem 0.875rem;
+      font-size: 0.8rem; color: var(--text-primary); cursor: pointer;
+      transition: border-color .2s, background .2s; text-decoration: none;
+    }
+    .chip:hover { border-color: var(--color-primary); background: var(--bg-card-hover); }
+
+    @media (max-width: 900px) { .results-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 600px) { .results-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+  <div id="header-placeholder"></div>
+
+  <main id="main-content">
+    <div class="container search-page">
+
+      <form class="search-bar-wrap" id="search-form">
+        <input class="search-input" type="search" id="search-input" placeholder="Buscar benefício... ex: plano de saúde, licença, academia" autocomplete="off">
+        <button class="search-btn" type="submit">Buscar</button>
+      </form>
+
+      <div id="results-area"></div>
+
+      <div class="suggestions" id="suggestions">
+        <div class="suggestions-title">Buscas frequentes</div>
+        <div class="suggestion-chips">
+          <a class="chip" href="search.html?q=plano+de+sa%C3%BAde">plano de saúde</a>
+          <a class="chip" href="search.html?q=licen%C3%A7a">licença</a>
+          <a class="chip" href="search.html?q=caju">caju</a>
+          <a class="chip" href="search.html?q=academia">academia</a>
+          <a class="chip" href="search.html?q=home+office">home office</a>
+          <a class="chip" href="search.html?q=terapia">terapia</a>
+          <a class="chip" href="search.html?q=cursos">cursos</a>
+          <a class="chip" href="search.html?q=beb%C3%AA">bebê</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
+  <script>const BASE = './';</script>
+  <script src="js/components.js"></script>
+  <script src="js/search-data.js"></script>
+  <script>
+  (function() {
+    const input = document.getElementById('search-input');
+    const form  = document.getElementById('search-form');
+    const area  = document.getElementById('results-area');
+    const sugg  = document.getElementById('suggestions');
+
+    const fuse = new Fuse(SEARCH_DATA, {
+      keys: [
+        { name: 'title', weight: 0.5 },
+        { name: 'desc',  weight: 0.3 },
+        { name: 'tags',  weight: 0.2 },
+      ],
+      threshold: 0.4,
+      includeScore: true,
+    });
+
+    function getQuery() {
+      return new URLSearchParams(window.location.search).get('q') || '';
+    }
+
+    function renderResults(q) {
+      if (!q) { area.innerHTML = ''; sugg.style.display = ''; return; }
+      sugg.style.display = 'none';
+
+      const raw = fuse.search(q);
+
+      if (raw.length === 0) {
+        area.innerHTML = `
+          <div class="no-results">
+            <div class="no-results-icon">🔍</div>
+            <h2>Nenhum resultado para "<strong>${q}</strong>"</h2>
+            <p>Tente buscar por outro termo — ex: "saúde", "licença", "academia".</p>
+          </div>`;
+        return;
+      }
+
+      const count = raw.length;
+      area.innerHTML = `
+        <div class="results-meta">
+          ${count} resultado${count !== 1 ? 's' : ''} para <strong>"${q}"</strong>
+        </div>
+        <div class="results-grid">
+          ${raw.map(r => {
+            const b = r.item;
+            return `
+              <a class="result-card" href="${BASE}${b.url}">
+                <div class="result-pilar" style="color:${b.pilarColor}">
+                  <span class="result-pilar-dot" style="background:${b.pilarColor}"></span>
+                  ${b.pilar}
+                </div>
+                <div class="result-title">${b.title}</div>
+                <div class="result-desc">${b.desc}</div>
+                <div class="result-arrow">Ver benefício →</div>
+              </a>`;
+          }).join('')}
+        </div>`;
+    }
+
+    function doSearch(q) {
+      input.value = q;
+      const url = new URL(window.location);
+      if (q) { url.searchParams.set('q', q); } else { url.searchParams.delete('q'); }
+      window.history.replaceState({}, '', url);
+      renderResults(q);
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      doSearch(input.value.trim());
+    });
+
+    input.addEventListener('input', () => {
+      if (!input.value.trim()) doSearch('');
+    });
+
+    // Executa na carga se houver ?q= na URL
+    const initial = getQuery();
+    if (initial) doSearch(initial);
+  })();
+  </script>
+</body>
+</html>

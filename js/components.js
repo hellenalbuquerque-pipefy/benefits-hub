@@ -7,6 +7,30 @@ const LOGO_PATH = 'M245.43 51.1485C245.43 51.0985 245.43 49.5185 245.44 49.4585C
 
 function renderHeader() {
   return `
+    <style>
+      .header-search { display:flex; align-items:center; gap:0.5rem; }
+      .search-toggle {
+        background:none; border:none; cursor:pointer; padding:0.35rem;
+        color:rgba(255,255,255,0.7); border-radius:6px;
+        display:flex; align-items:center; transition:color .2s, background .2s;
+      }
+      .search-toggle:hover { color:#fff; background:rgba(255,255,255,.1); }
+      .search-toggle svg { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; }
+      .header-search-form {
+        display:flex; align-items:center; gap:0.4rem;
+        animation: fadeIn .15s ease;
+      }
+      .header-search-form[hidden] { display:none; }
+      @keyframes fadeIn { from { opacity:0; transform:translateX(8px); } to { opacity:1; transform:translateX(0); } }
+      .header-search-input {
+        background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25);
+        color:#fff; border-radius:6px; padding:.35rem .75rem;
+        font-size:.85rem; font-family:inherit; width:200px;
+        transition:background .2s, border-color .2s;
+      }
+      .header-search-input::placeholder { color:rgba(255,255,255,.5); }
+      .header-search-input:focus { outline:none; background:rgba(255,255,255,.18); border-color:rgba(255,255,255,.5); }
+    </style>
     <header class="site-header" role="banner">
       <div class="container">
         <a href="${BASE}index.html" class="header-logo" aria-label="Benefits Hub — Página inicial">
@@ -21,6 +45,14 @@ function renderHeader() {
           <a href="${BASE}parentalidade.html">Parentalidade</a>
           <a href="${BASE}links-uteis.html">Links Úteis</a>
           <a href="${BASE}fale-com-o-time.html" class="nav-cta">Fale com o Time</a>
+          <div class="header-search">
+            <button class="search-toggle" id="search-toggle" aria-label="Buscar benefício" aria-expanded="false">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+            <form class="header-search-form" id="header-search-form" action="${BASE}search.html" method="GET" hidden>
+              <input class="header-search-input" type="search" name="q" id="header-search-input" placeholder="Buscar benefício..." autocomplete="off">
+            </form>
+          </div>
         </nav>
       </div>
     </header>`;
@@ -53,10 +85,38 @@ function markActiveLink() {
   });
 }
 
+function initSearch() {
+  const toggle = document.getElementById('search-toggle');
+  const form   = document.getElementById('header-search-form');
+  const input  = document.getElementById('header-search-input');
+  if (!toggle || !form || !input) return;
+
+  toggle.addEventListener('click', () => {
+    const open = !form.hidden;
+    form.hidden = open;
+    toggle.setAttribute('aria-expanded', String(!open));
+    if (!open) { input.focus(); }
+  });
+
+  // Fechar com Escape
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { form.hidden = true; toggle.setAttribute('aria-expanded', 'false'); toggle.focus(); }
+  });
+
+  // Fechar clicando fora
+  document.addEventListener('click', e => {
+    if (!form.hidden && !form.contains(e.target) && e.target !== toggle) {
+      form.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const h = document.getElementById('header-placeholder');
   const f = document.getElementById('footer-placeholder');
   if (h) h.innerHTML = renderHeader();
   if (f) f.innerHTML = renderFooter();
   markActiveLink();
+  initSearch();
 });
